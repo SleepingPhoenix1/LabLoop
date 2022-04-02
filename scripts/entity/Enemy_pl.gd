@@ -6,25 +6,26 @@ var gravity = 10
 var sleeping = true
 
 func _physics_process(delta):
-	if $raycasts/RayCastLeft.is_colliding() == true:
-		if sleeping:
-			$AnimationPlayer.play("wake_up")
+	if Global.Player:
+		if $raycasts/RayCastLeft.get_collider() == Global.Player:
+			if sleeping:
+				$AnimationPlayer.play("wake_up")
+			else: 
+				$AnimationPlayer.play("walk")
+				velocity.x = -speed
+		elif $raycasts/RayCastRight.get_collider() == Global.Player:
+			
+			if sleeping:
+				$AnimationPlayer.play("wake_up")
+			else: 
+				$AnimationPlayer.play("walk")
+				velocity.x = speed
+			
 		else: 
-			$AnimationPlayer.play("walk")
-			velocity.x = -speed
-	elif $raycasts/RayCastRight.is_colliding() == true:
-		
-		if sleeping:
-			$AnimationPlayer.play("wake_up")
-		else: 
-			$AnimationPlayer.play("walk")
-			velocity.x = speed
-		
-	else: 
-		velocity.x = 0
-		if $AnimationPlayer.current_animation == "walk":
-			$SleepTimer.start()
-			$AnimationPlayer.play("idle")
+			velocity.x = 0
+			if $AnimationPlayer.current_animation == "walk":
+				$SleepTimer.start()
+				$AnimationPlayer.play("idle")
 	
 	if !is_on_floor():
 		velocity.y += gravity
@@ -46,4 +47,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_SleepTimer_timeout():
 	$AnimationPlayer.play("to_sleep")
 	sleeping = true
-	print("F")

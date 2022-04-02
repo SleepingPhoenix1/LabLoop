@@ -90,7 +90,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "walk"
-length = 0.8
+length = 1.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Robot:frame")
@@ -99,10 +99,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 2, 3, 2 ]
+"values": [ 4, 2, 3, 2, 4, 5, 3, 2 ]
 }
 
 [node name="Enemy" type="KinematicBody2D"]
@@ -120,7 +120,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 centered = false
-hframes = 5
+hframes = 6
 
 [node name="Block" type="Sprite" parent="."]
 visible = false
@@ -134,14 +134,14 @@ centered = false
 [node name="RayCastLeft" type="RayCast2D" parent="raycasts"]
 position = Vector2( 0, -4 )
 enabled = true
-cast_to = Vector2( -50, 0 )
-collision_mask = 4
+cast_to = Vector2( -45, 0 )
+collision_mask = 20
 
 [node name="RayCastRight" type="RayCast2D" parent="raycasts"]
 position = Vector2( 7, -4 )
 enabled = true
-cast_to = Vector2( 50, 0 )
-collision_mask = 4
+cast_to = Vector2( 45, 0 )
+collision_mask = 20
 
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -161,7 +161,7 @@ anims/wake_up = SubResource( 6 )
 anims/walk = SubResource( 7 )
 
 [node name="SleepTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.2
 one_shot = true
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]

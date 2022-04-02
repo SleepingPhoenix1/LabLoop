@@ -318,4 +318,13 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -144.0
+margin_top = -96.0
+margin_right = -104.0
+margin_bottom = -56.0
+rect_scale = Vector2( 1.2, 1.2 )
+text = "sss"
+
 [connection signal="timeout" from="wall_jump_timer" to="." method="_on_wall_jump_timer_timeout"]

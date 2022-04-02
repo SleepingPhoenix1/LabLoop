@@ -48,11 +48,12 @@ func _ready():
 	deceleration = export_deceleration
 
 func _process(delta):
+	Global.Player = self
 	if has_jumped and is_on_floor():
 		max_speed = export_max_speed
 		has_jumped = false
 		tick = false
-		
+	$RichTextLabel.text = str(Global.coll_coins)
 	
 	###### GRAVITY ######
 	if !is_on_floor():
