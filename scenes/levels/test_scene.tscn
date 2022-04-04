@@ -202,7 +202,7 @@ position = Vector2( 112, 32 )
 position = Vector2( 0, 80 )
 
 [node name="Coin3" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 48, 64 )
+position = Vector2( 58, 64 )
 
 [node name="Node2D" parent="Node2D" instance=ExtResource( 7 )]
 position = Vector2( 116, 104 )

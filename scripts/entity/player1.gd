@@ -252,3 +252,10 @@ func movement_td():
 		else: _speed =0
 	
 	move_and_slide(velocity * _speed, Vector2.UP)
+
+
+func shooting():
+	pass
+
+
+
