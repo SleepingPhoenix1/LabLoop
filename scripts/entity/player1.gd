@@ -38,16 +38,25 @@ var has_jumped = false
 export var slower_fall_mult = 20
 
 
+# top down movement variables
 var _acceleration = 20
 var _max_speed =120
-var _speed = 0
+var _speed = 120
 
+#shooter genre
+var Bullet_position
+onready var AnimTree = $AnimationTree
+onready var AnimState = AnimTree.get("parameters/playback")
+
+#instances
+onready var Bullet = preload("res://scenes/entity/bullet.tscn")
 
 func _ready():
 	max_speed = export_max_speed
 	deceleration = export_deceleration
 
 func _process(delta):
+	shooting()
 	Global.Player = self
 	if has_jumped and is_on_floor():
 		max_speed = export_max_speed
@@ -241,21 +250,21 @@ func movement_td():
 	velocity.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	velocity.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	velocity = velocity.normalized()
-	
-	if velocity != Vector2(0,0):
-		if _speed <= _max_speed:
-			_speed += _acceleration
-		else: _speed == _max_speed
+	if velocity != Vector2.ZERO:
+		AnimTree.set("parameters/idle/blend_position", velocity)
+		AnimTree.set("parameters/walk/blend_position", velocity)
+		AnimState.travel("walk")
 	else:
-		if _speed > 0:
-			_speed -= _acceleration
-		else: _speed =0
+		AnimState.travel("idle")
+	
 	
 	move_and_slide(velocity * _speed, Vector2.UP)
 
 
 func shooting():
-	pass
+	Bullet_position = $Position2D.global_position
+	if Input.is_action_just_pressed("shoot") and GenreManager.current_genre == 1:
+		Global.instance_node(Bullet, Bullet_position, get_parent())
 
 
 
