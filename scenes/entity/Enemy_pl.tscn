@@ -22,7 +22,7 @@ shader = SubResource( 2 )
 shader_param/Color = Color( 0.882353, 0.243137, 0.243137, 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 4.21794, 4.13682 )
+extents = Vector2( 4.58154, 2.56954 )
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -149,8 +149,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea"]
-visible = false
-position = Vector2( 3.94514, -3.99773 )
+position = Vector2( 3.58154, -2.43046 )
 shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

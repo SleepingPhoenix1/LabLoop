@@ -75,8 +75,9 @@ func _process(delta):
 			tick = true
 			has_pressed_jump = false
 		
-
 	
+	## health manager ##
+	$Control/ProgressBar.value = Global.Health
 	
 
 
@@ -91,6 +92,9 @@ func _physics_process(_delta):
 		$Player.show()
 	elif GenreManager.current_genre == 1:
 		movement_td()
+		$PlayerAShoot.show()
+		$AnimationTree.active = true
+		$Player.hide()
 	#print(has_jumped)
 	
 

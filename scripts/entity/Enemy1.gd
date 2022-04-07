@@ -66,7 +66,6 @@ func navigate():	# Define the next position to go to
 func generate_path():	# It's obvious
 	if levelNavigation != null and player != null:
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
-		line2d.points = path
 
 func move():
 	if velocity != Vector2.ZERO:

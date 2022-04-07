@@ -35,7 +35,7 @@ func _physics_process(delta):
 	$Robot.flip_h = true if velocity.x <0 else false
 
 func _on_DamageArea_body_entered(body):
-	get_tree().reload_current_scene()
+	Global.Health -=1
 	
 
 
