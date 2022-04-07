@@ -2,30 +2,12 @@
 
 [ext_resource path="res://sprites/bullet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/entity/bullet.gd" type="Script" id=2]
+[ext_resource path="res://other/color_swap.tres" type="Material" id=3]
+[ext_resource path="res://sprites/block.png" type="Texture" id=4]
+[ext_resource path="res://other/bullet.tres" type="Material" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.5, 1.5 )
-
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.552795, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 0.384314, 0.384314, 0.384314, 0.733333, 0.785156, 0.785156, 0.785156, 0 )
-
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 2 )
-
-[sub_resource type="ParticlesMaterial" id=4]
-emission_shape = 1
-emission_sphere_radius = 4.0
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.22
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 1.4
-scale_random = 0.5
-color_ramp = SubResource( 5 )
 
 [node name="Area2D" type="Area2D" groups=["Bullet"]]
 collision_layer = 32
@@ -33,6 +15,7 @@ collision_mask = 272
 script = ExtResource( 2 )
 
 [node name="Bullet" type="Sprite" parent="."]
+material = ExtResource( 3 )
 position = Vector2( 0, -1 )
 texture = ExtResource( 1 )
 
@@ -49,12 +32,15 @@ wait_time = 0.25
 one_shot = true
 
 [node name="explosion" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.505882 )
+material = ExtResource( 3 )
 emitting = false
 amount = 20
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 4 )
+process_material = ExtResource( 5 )
+texture = ExtResource( 4 )
 
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

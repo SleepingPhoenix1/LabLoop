@@ -1,7 +1,7 @@
 extends Area2D
 
 var velocity = Vector2(0,1)
-var speed = 175
+var speed = 125
 
 var look_once = true
 var is_exploiding = false

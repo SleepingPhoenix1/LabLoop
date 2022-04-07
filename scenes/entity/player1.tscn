@@ -1,9 +1,11 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://sprites/Player_a.png" type="Texture" id=1]
 [ext_resource path="res://scripts/entity/player1.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Player_a_shoot.png" type="Texture" id=3]
 [ext_resource path="res://sprites/health_bar_logo.png" type="Texture" id=4]
+[ext_resource path="res://other/color_swap.tres" type="Material" id=5]
+[ext_resource path="res://sprites/block.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -335,6 +337,8 @@ gravity = Vector3( -5, 0, 0 )
 initial_velocity = -5.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 0.09
+scale_random = 0.2
 color_ramp = SubResource( 39 )
 
 [sub_resource type="Theme" id=40]
@@ -372,6 +376,7 @@ shape = SubResource( 1 )
 
 [node name="Player" type="Sprite" parent="."]
 visible = false
+material = ExtResource( 5 )
 position = Vector2( -4, -4 )
 texture = ExtResource( 1 )
 centered = false
@@ -380,6 +385,7 @@ vframes = 6
 frame = 1
 
 [node name="PlayerAShoot" type="Sprite" parent="."]
+material = ExtResource( 5 )
 texture = ExtResource( 3 )
 hframes = 6
 vframes = 6
@@ -448,13 +454,15 @@ parameters/idle/blend_position = Vector2( 0.592008, 0.0775862 )
 parameters/walk/blend_position = Vector2( 0, 0 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
+material = ExtResource( 5 )
 position = Vector2( 0, 4 )
 emitting = false
-amount = 15
+amount = 10
 lifetime = 0.7
 randomness = 0.28
 local_coords = false
 process_material = SubResource( 37 )
+texture = ExtResource( 6 )
 
 [node name="Camera2D2" type="Camera2D" parent="."]
 position = Vector2( 0, -32 )
