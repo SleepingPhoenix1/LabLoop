@@ -319,7 +319,7 @@ start_node = "idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
-[node name="KinematicBody2D" type="KinematicBody2D" groups=["player"]]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=["Player", "player"]]
 collision_layer = 4
 collision_mask = 258
 script = ExtResource( 2 )
@@ -332,12 +332,11 @@ lowfallMultiplier = 75
 maxfallspeed = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4, -4 )
 shape = SubResource( 1 )
 
 [node name="Player" type="Sprite" parent="."]
 visible = false
-position = Vector2( 0, -8 )
+position = Vector2( -4, -4 )
 texture = ExtResource( 1 )
 centered = false
 hframes = 5
@@ -345,7 +344,6 @@ vframes = 6
 frame = 1
 
 [node name="PlayerAShoot" type="Sprite" parent="."]
-position = Vector2( 4, -4 )
 texture = ExtResource( 3 )
 hframes = 6
 vframes = 6
@@ -356,7 +354,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="jumpBuffer" type="RayCast2D" parent="."]
-position = Vector2( 4, 0 )
+position = Vector2( 0, 4 )
 enabled = true
 cast_to = Vector2( 0, 15 )
 collision_mask = 257
@@ -404,7 +402,6 @@ rect_scale = Vector2( 1.2, 1.2 )
 text = "sss"
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 4, -4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 28 )

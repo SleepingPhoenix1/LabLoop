@@ -12,8 +12,13 @@ func _process(delta):
 	if look_once:
 		look_at(get_global_mouse_position())
 		look_once = false
+		$Explosion.start()
 	global_position += velocity.rotated(rotation) * speed * delta
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()
+
+
+func _on_Explosion_timeout():
 	queue_free()
