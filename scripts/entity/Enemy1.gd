@@ -81,7 +81,7 @@ func move():
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Bullet"):
 		health -=1
-		area.queue_free()
+		area.explode()
 
 
 func _on_shoot_timer_timeout():

@@ -4,6 +4,7 @@ var velocity = Vector2(1,0)
 var speed = 250
 
 var look_once = true
+var is_exploiding = false
 
 func _ready():
 	pass
@@ -14,6 +15,9 @@ func _process(delta):
 		look_once = false
 		$Explosion.start()
 	global_position += velocity.rotated(rotation) * speed * delta
+	
+	if !$explosion.emitting and is_exploiding:
+		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -21,4 +25,16 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Explosion_timeout():
-	queue_free()
+	explode()
+
+func explode():
+	$explosion.emitting = true
+	$Bullet.hide()
+	$CollisionShape2D.set_deferred("disabled", true)
+	velocity = Vector2.ZERO
+	is_exploiding = true
+
+
+
+func _on_Area2D_body_entered(body):
+	explode()

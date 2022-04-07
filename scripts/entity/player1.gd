@@ -86,6 +86,9 @@ func _physics_process(_delta):
 		movement()
 		animations()
 		jump_manager()
+		$PlayerAShoot.hide()
+		$AnimationTree.active = false
+		$Player.show()
 	elif GenreManager.current_genre == 1:
 		movement_td()
 	#print(has_jumped)
@@ -144,6 +147,14 @@ func movement():
 	if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"): 
 		is_moving = false
 		deceleration()
+	
+	if velocity.x != 0 and !has_jumped:
+		$Particles2D.emitting = true
+	else:
+		$Particles2D.emitting = false
+	
+	
+	
 	
 	##### COYOTE TIMER #####
 	var was_on_floor = is_on_floor()
@@ -251,11 +262,13 @@ func movement_td():
 	velocity.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	velocity = velocity.normalized()
 	if velocity != Vector2.ZERO:
+		$Particles2D.emitting = true
 		AnimTree.set("parameters/idle/blend_position", velocity)
 		AnimTree.set("parameters/walk/blend_position", velocity)
 		AnimState.travel("walk")
 	else:
 		AnimState.travel("idle")
+		$Particles2D.emitting = false
 	
 	
 	move_and_slide(velocity * _speed, Vector2.UP)
