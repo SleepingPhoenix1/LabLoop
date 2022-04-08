@@ -20,7 +20,6 @@ onready var Bullet_e = preload("res://scenes/entity/bullet_enemy.tscn")
 
 
 func _ready():
-	yield(get_tree(), "idle_frame")
 	var tree = get_tree()
 	if tree.has_group("LevelNavigation"):
 		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]

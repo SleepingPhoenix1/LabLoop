@@ -8,6 +8,7 @@ var sleeping = true
 func _physics_process(delta):
 	if Global.Player:
 		if $raycasts/RayCastLeft.get_collider() == Global.Player:
+			$SleepTimer.stop()
 			if sleeping:
 				$AnimationPlayer.play("wake_up")
 			else: 

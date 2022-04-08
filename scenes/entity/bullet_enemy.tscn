@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://sprites/bullet.png" type="Texture" id=1]
+[ext_resource path="res://sprites/electric_stuff.png" type="Texture" id=1]
 [ext_resource path="res://scripts/entity/bullet_enemy.gd" type="Script" id=2]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=3]
 [ext_resource path="res://other/bullet.tres" type="Material" id=4]
+[ext_resource path="res://sprites/block.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.5, 1.5 )
@@ -16,7 +17,10 @@ script = ExtResource( 2 )
 [node name="Bullet" type="Sprite" parent="."]
 material = ExtResource( 3 )
 position = Vector2( 0, -1 )
+rotation = 1.5708
 texture = ExtResource( 1 )
+vframes = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 0.5 )
@@ -38,6 +42,7 @@ lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
 process_material = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

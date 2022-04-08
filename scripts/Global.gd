@@ -2,6 +2,7 @@ extends Node
 
 var Player = null
 var Health = 10
+var selected = false
 
 var coll_coins = 0
 

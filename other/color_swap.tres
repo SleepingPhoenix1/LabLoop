@@ -77,4 +77,4 @@ shader_param/color4 = null
 shader_param/color5 = null
 shader_param/color6 = null
 shader_param/color7 = null
-shader_param/color8 = Color( 0.4, 0.505882, 0.192157, 1 )
+shader_param/color8 = Color( 0.301961, 0.368627, 0.168627, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/entity/player1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/block.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/enviroment/box_left.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sprites/decorations.png" type="Texture" id=12]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=13]
+[ext_resource path="res://scripts/levels/test_scene.gd" type="Script" id=14]
+[ext_resource path="res://scenes/enviroment/button.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -263,17 +265,22 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 extents = Vector2( 8, 8 )
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 14 )
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( -16, 104 )
 
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
+layer = -2
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/CanvasLayer"]
 material = ExtResource( 13 )
-margin_left = -312.0
-margin_top = -220.0
-margin_right = 740.0
-margin_bottom = 345.0
+margin_left = -328.0
+margin_top = -116.0
+margin_right = 724.0
+margin_bottom = 449.0
 rect_pivot_offset = Vector2( 602, 377 )
+mouse_filter = 2
 
 [node name="Navigation2D" type="Navigation2D" parent="Node2D" groups=["LevelNavigation"]]
 position = Vector2( 16, -104 )
@@ -312,7 +319,7 @@ position = Vector2( 36, 16 )
 
 [node name="box_l" parent="Node2D" instance=ExtResource( 11 )]
 material = ExtResource( 13 )
-position = Vector2( 202, 17 )
+position = Vector2( 202, 12 )
 
 [node name="ElectricLamp3" parent="Node2D" instance=ExtResource( 9 )]
 material = ExtResource( 13 )
@@ -350,24 +357,49 @@ position = Vector2( 0, 80 )
 material = ExtResource( 13 )
 position = Vector2( 58, 64 )
 
-[node name="Node2D" parent="Node2D" instance=ExtResource( 7 )]
-material = ExtResource( 13 )
-position = Vector2( 116, 104 )
+[node name="Area2D2" parent="Node2D" instance=ExtResource( 15 )]
+position = Vector2( -40, 19 )
 
-[node name="Node2D2" parent="Node2D" instance=ExtResource( 7 )]
+[node name="Node2D2" parent="." instance=ExtResource( 7 )]
 material = ExtResource( 13 )
-position = Vector2( 249, 16 )
+position = Vector2( 106, 204 )
 
-[node name="Enemy" parent="." instance=ExtResource( 4 )]
+[node name="Node2D3" parent="." instance=ExtResource( 7 )]
+material = ExtResource( 13 )
+position = Vector2( 233, 116 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="platformer" type="Node2D" parent="enemies"]
+
+[node name="Enemy" parent="enemies/platformer" instance=ExtResource( 4 )]
 material = ExtResource( 13 )
 position = Vector2( 216, 120 )
 
-[node name="KinematicBody2D2" parent="." instance=ExtResource( 8 )]
+[node name="Enemy2" parent="enemies/platformer" instance=ExtResource( 4 )]
+material = ExtResource( 13 )
+position = Vector2( 8, 208 )
+
+[node name="shooter" type="Node2D" parent="enemies"]
+
+[node name="KinematicBody2D2" parent="enemies/shooter" instance=ExtResource( 8 )]
 material = ExtResource( 13 )
 position = Vector2( 12, 74 )
 
+[node name="KinematicBody2D3" parent="enemies/shooter" instance=ExtResource( 8 )]
+material = ExtResource( 13 )
+position = Vector2( -50, 99 )
+
+[node name="KinematicBody2D4" parent="enemies/shooter" instance=ExtResource( 8 )]
+material = ExtResource( 13 )
+position = Vector2( 166, 93 )
+
+[node name="KinematicBody2D5" parent="enemies/shooter" instance=ExtResource( 8 )]
+material = ExtResource( 13 )
+position = Vector2( 296, 123 )
+
 [node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
 material = ExtResource( 13 )
-position = Vector2( -48, 184 )
+position = Vector2( -62, 199 )
 
 [connection signal="body_entered" from="Node2D/Area2D" to="Node2D/Area2D" method="_on_Area2D_body_entered"]

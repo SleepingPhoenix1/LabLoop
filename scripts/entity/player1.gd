@@ -43,6 +43,10 @@ var _acceleration = 20
 var _max_speed =120
 var _speed = 120
 
+#puzzle variables
+var selected = false
+
+
 #shooter genre
 var Bullet_position
 onready var AnimTree = $AnimationTree
@@ -56,7 +60,6 @@ func _ready():
 	deceleration = export_deceleration
 
 func _process(delta):
-	shooting()
 	Global.Player = self
 	if has_jumped and is_on_floor():
 		max_speed = export_max_speed
@@ -92,6 +95,13 @@ func _physics_process(_delta):
 		$Player.show()
 	elif GenreManager.current_genre == 1:
 		movement_td()
+		shooting()
+		$PlayerAShoot.show()
+		$AnimationTree.active = true
+		$Player.hide()
+	elif GenreManager.current_genre ==2:
+		movement_td()
+		drag_n_drop()
 		$PlayerAShoot.show()
 		$AnimationTree.active = true
 		$Player.hide()
@@ -280,8 +290,9 @@ func movement_td():
 
 func shooting():
 	Bullet_position = $Position2D.global_position
-	if Input.is_action_just_pressed("shoot") and GenreManager.current_genre == 1:
+	if Input.is_action_just_pressed("shoot"):
 		Global.instance_node(Bullet, Bullet_position, get_parent())
 
-
+func drag_n_drop():
+	pass
 
