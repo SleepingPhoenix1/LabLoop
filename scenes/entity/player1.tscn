@@ -8,7 +8,7 @@
 [ext_resource path="res://sprites/block.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4 )
+extents = Vector2( 3.96798, 3.95521 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -333,8 +333,7 @@ emission_shape = 1
 emission_sphere_radius = 1.0
 flag_disable_z = true
 spread = 20.29
-gravity = Vector3( -5, 0, 0 )
-initial_velocity = -5.0
+gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.09
@@ -372,6 +371,7 @@ lowfallMultiplier = 75
 maxfallspeed = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.00180697, 0.044793 )
 shape = SubResource( 1 )
 
 [node name="Player" type="Sprite" parent="."]
@@ -389,7 +389,7 @@ material = ExtResource( 5 )
 texture = ExtResource( 3 )
 hframes = 6
 vframes = 6
-frame = 1
+frame = 6
 
 [node name="Coyote timer" type="Timer" parent="."]
 wait_time = 0.1
@@ -402,7 +402,7 @@ cast_to = Vector2( 0, 15 )
 collision_mask = 257
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+volume_db = -15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/charge_catcher.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 4, 3.5 )
+
+[node name="charge_catcher" type="Node2D" groups=["charge_catcher"]]
+
+[node name="Node2D" type="StaticBody2D" parent="."]
+position = Vector2( -4, 4 )
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+position = Vector2( 4, -3.5 )
+shape = SubResource( 4 )
+
+[node name="ChargeCatcher" type="Sprite" parent="Node2D"]
+position = Vector2( 4, -3 )
+texture = ExtResource( 1 )

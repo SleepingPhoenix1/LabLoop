@@ -24,7 +24,7 @@ func _physics_process(delta):
 			
 		else: 
 			velocity.x = 0
-			if $AnimationPlayer.current_animation == "walk":
+			if $AnimationPlayer.current_animation == "walk" or $AnimationPlayer.current_animation == "wake_up":
 				$SleepTimer.start()
 				$AnimationPlayer.play("idle")
 	

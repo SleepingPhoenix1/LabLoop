@@ -292,6 +292,8 @@ func shooting():
 	Bullet_position = $Position2D.global_position
 	if Input.is_action_just_pressed("shoot"):
 		Global.instance_node(Bullet, Bullet_position, get_parent())
+		$SoundPlayer.stream = preload("res://sound/Lab_Loop_Sound_FX_Pistol.wav")
+		$SoundPlayer.play()
 
 func drag_n_drop():
 	pass

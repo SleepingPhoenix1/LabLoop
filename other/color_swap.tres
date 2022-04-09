@@ -69,7 +69,7 @@ void fragment() {
 
 [resource]
 shader = SubResource( 6 )
-shader_param/color0 = Color( 0.878431, 0.392157, 0.392157, 1 )
+shader_param/color0 = Color( 0, 0, 0, 1 )
 shader_param/color1 = null
 shader_param/color2 = null
 shader_param/color3 = null
@@ -77,4 +77,4 @@ shader_param/color4 = null
 shader_param/color5 = null
 shader_param/color6 = null
 shader_param/color7 = null
-shader_param/color8 = Color( 0.301961, 0.368627, 0.168627, 1 )
+shader_param/color8 = Color( 1, 1, 1, 1 )
