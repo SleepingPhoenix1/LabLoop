@@ -17,9 +17,12 @@ onready var AnimState = AnimTree.get("parameters/playback")
 var player_direction = Vector2()
 var can_shoot = false
 onready var Bullet_e = preload("res://scenes/entity/bullet_enemy.tscn")
+onready var health_p = preload("res://scenes/enviroment/health_pot.tscn")
+
 
 
 func _ready():
+	randomize()
 	var tree = get_tree()
 	if tree.has_group("LevelNavigation"):
 		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
@@ -39,6 +42,11 @@ func _physics_process(delta):
 	
 	#health
 	if health <= 0:
+		var ins = health_p.instance()
+		ins.global_position = global_position
+		if rand_range(0,5) < 1:
+			print("F")
+			get_parent().get_parent().add_child(ins)
 		queue_free()
 
 func check_player_in_detection() -> bool:

@@ -26,7 +26,7 @@ extents = Vector2( 3, 3 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4, 4 )
 
-[node name="box_l" type="Node2D"]
+[node name="box_l" type="Node2D" groups=["b_left"]]
 script = ExtResource( 3 )
 
 [node name="box_l" type="StaticBody2D" parent="." groups=["b_left"]]
@@ -37,14 +37,13 @@ collision_mask = 6
 material = ExtResource( 2 )
 position = Vector2( -4, -4 )
 frames = SubResource( 9 )
-frame = 1
 playing = true
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box_l"]
 shape = SubResource( 4 )
 
-[node name="area" type="Area2D" parent="."]
+[node name="area" type="Area2D" parent="." groups=["b_left"]]
 collision_layer = 16
 collision_mask = 0
 __meta__ = {

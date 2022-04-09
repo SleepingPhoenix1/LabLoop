@@ -152,7 +152,7 @@ position = Vector2( 161, -30 )
 
 [node name="box_r2" parent="Node2D" instance=ExtResource( 10 )]
 material = ExtResource( 13 )
-position = Vector2( 36, 16 )
+position = Vector2( 36, 12 )
 
 [node name="box_l" parent="Node2D" instance=ExtResource( 11 )]
 material = ExtResource( 13 )

@@ -56,6 +56,8 @@ onready var AnimState = AnimTree.get("parameters/playback")
 onready var Bullet = preload("res://scenes/entity/bullet.tscn")
 
 func _ready():
+	$fade_out.show()
+	$fade.play("fade_out")
 	max_speed = export_max_speed
 	deceleration = export_deceleration
 
@@ -292,6 +294,8 @@ func shooting():
 	Bullet_position = $Position2D.global_position
 	if Input.is_action_just_pressed("shoot"):
 		Global.instance_node(Bullet, Bullet_position, get_parent())
+		randomize()
+		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = preload("res://sound/Lab_Loop_Sound_FX_Pistol.wav")
 		$SoundPlayer.play()
 
