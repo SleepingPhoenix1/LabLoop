@@ -1,6 +1,6 @@
 extends Node
 
-var current_genre = 2
+var current_genre = 0
 
 
 

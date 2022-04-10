@@ -7,7 +7,6 @@ func _process(delta):
 		var door = get_node(door_)
 		if get_overlapping_bodies() != []:
 			door._open()
-			print("F")
-		if get_overlapping_areas() != []:
+		elif get_overlapping_areas() != []:
 			door._open()
 		else: door._close()

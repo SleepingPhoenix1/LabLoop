@@ -15,5 +15,5 @@ func instance_node(node, location, parent):
 
 func _process(delta):
 	if Health <= 0:
-		get_tree().reload_current_scene()
+		Player.finish()
 		Health = 10

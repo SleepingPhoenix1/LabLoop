@@ -302,3 +302,10 @@ func shooting():
 func drag_n_drop():
 	pass
 
+func finish():
+	$fade.play("fade_in")
+
+
+func _on_fade_animation_finished(anim_name):
+	if anim_name == "fade_in":
+		get_tree().reload_current_scene()

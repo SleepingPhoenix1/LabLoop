@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+export var open_by_button = false
 export var buttons_required = 2
 export var close_on_genre = true
 export var open_on_genre = true
@@ -10,7 +11,7 @@ export var starting_state = 0
 
 
 func _ready():
-	if starting_state == 0:
+	if starting_state == 0 and !open_by_button:
 		_close()
 	elif starting_state == 1:
 		_open()

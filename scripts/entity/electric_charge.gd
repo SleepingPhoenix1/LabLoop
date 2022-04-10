@@ -40,8 +40,8 @@ func _on_Area2D_body_entered(body):
 	elif body.is_in_group("b_right"):
 		rotation_degrees -= 90
 	elif body.is_in_group("charge_catcher"):
+		body.get_parent().activate()
 		explode()
-		body.activate()
 	else:
 		explode()
 		if body.is_in_group("player"):
