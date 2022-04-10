@@ -8,7 +8,7 @@
 [ext_resource path="res://sprites/block.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.96798, 3.95521 )
+extents = Vector2( 3.70932, 3.95521 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -418,7 +418,7 @@ lowfallMultiplier = 75
 maxfallspeed = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.00180697, 0.044793 )
+position = Vector2( 0.256852, 0.044793 )
 shape = SubResource( 1 )
 
 [node name="Player" type="Sprite" parent="."]

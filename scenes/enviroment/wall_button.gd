@@ -4,7 +4,8 @@ export(NodePath) var door
 var can_press = true
 
 
-func _on_wall_button_input_event(viewport, event, shape_idx):
-	if $Area2D.get_overlapping_bodies() != [] and Input.is_action_just_pressed("shoot") and can_press:
+func _process(_delta):
+	if $Area2D.get_overlapping_bodies() != [] and $Area2D2.get_overlapping_areas() != [] and can_press:
 		get_node(door).buttons_required -=1
 		can_press = false
+		$WallButton.frame = 1

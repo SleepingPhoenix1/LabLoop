@@ -5,14 +5,14 @@
 [ext_resource path="res://other/color_swap.tres" type="Material" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 3 )
+extents = Vector2( 7, 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 41, 25 )
 
 [node name="wall_button" type="Area2D"]
 collision_layer = 128
-collision_mask = 4
+collision_mask = 36
 script = ExtResource( 2 )
 
 [node name="WallButton" type="Sprite" parent="."]
@@ -22,7 +22,7 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -33,4 +33,10 @@ collision_mask = 4
 position = Vector2( 0, 19 )
 shape = SubResource( 2 )
 
-[connection signal="input_event" from="." to="." method="_on_wall_button_input_event"]
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 36
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )

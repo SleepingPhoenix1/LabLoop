@@ -26,6 +26,7 @@ shape = SubResource( 4 )
 material = ExtResource( 2 )
 position = Vector2( 4, -3 )
 texture = ExtResource( 1 )
+hframes = 2
 
 [node name="area" type="Area2D" parent="." groups=["charge_catcher"]]
 collision_layer = 16
