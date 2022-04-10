@@ -360,9 +360,8 @@ shape = SubResource( 45 )
 collision_layer = 0
 collision_mask = 6
 script = SubResource( 38 )
-close_on_genre = false
 open_on_genre = false
-genre_number = 2
+starting_state = 1
 
 [node name="TileMap" type="TileMap" parent="enviroment/doors/Door6"]
 material = ExtResource( 1 )
@@ -597,6 +596,3 @@ position = Vector2( -6, -124 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 106, 180 )
-
-[connection signal="input_event" from="enviroment/buttons/wall_button" to="enviroment/buttons/wall_button" method="_on_wall_button_input_event"]
-[connection signal="input_event" from="enviroment/buttons/wall_button2" to="enviroment/buttons/wall_button2" method="_on_wall_button_input_event"]
