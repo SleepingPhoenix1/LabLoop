@@ -42,10 +42,10 @@ func _physics_process(delta):
 	
 	#health
 	if health <= 0:
-		var ins = health_p.instance()
-		ins.global_position = global_position
+		Global.coll_coins += 3
 		if rand_range(0,5) < 1:
-			print("F")
+			var ins = health_p.instance()
+			ins.global_position = global_position
 			get_parent().get_parent().add_child(ins)
 		queue_free()
 
@@ -93,3 +93,4 @@ func _on_Area2D_area_entered(area):
 func _on_shoot_timer_timeout():
 	if can_shoot:
 		Global.instance_node(Bullet_e, global_position, get_parent())
+
