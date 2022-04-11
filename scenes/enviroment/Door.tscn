@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/enviroment/Door.gd" type="Script" id=2]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=3]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="TileSet" id=6]
 0/name = "door.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -52,19 +52,19 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 48, 4 )
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 40 )
 
 [node name="Door" type="StaticBody2D"]
 script = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 3 )
-tile_set = SubResource( 1 )
+tile_set = SubResource( 6 )
 cell_size = Vector2( 8, 8 )
 format = 1
 tile_data = PoolIntArray( -65537, 0, 0, -1, 0, 65536, 65535, 0, 65536, 131071, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -4, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )

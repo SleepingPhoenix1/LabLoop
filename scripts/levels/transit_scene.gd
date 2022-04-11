@@ -26,7 +26,13 @@ func _on_LevelComplete_1_animation_finished(anim_name):
 		level_switcher()
 
 func level_switcher():
-	if GenreManager.current_level == 2:
+	if GenreManager.current_level == 1:
+		if GenreManager.current_genre == 3:
+			get_tree().change_scene("res://scenes/levels/Level2.tscn")
+			GenreManager.current_genre = 0
+		else: 
+			get_tree().change_scene("res://scenes/levels/Level1.tscn")
+	elif GenreManager.current_level == 2:
 		if GenreManager.current_genre == 3:
 			get_tree().change_scene("res://scenes/levels/Level3.tscn")
 			GenreManager.current_genre = 0
@@ -40,7 +46,13 @@ func level_switcher():
 			get_tree().change_scene("res://scenes/levels/Level3.tscn")
 	elif GenreManager.current_level == 4:
 		if GenreManager.current_genre == 3:
-			get_tree().change_scene("res://scenes/levels/Level4.tscn")
+			get_tree().change_scene("res://scenes/levels/Level5.tscn")
 			GenreManager.current_genre = 0
 		else: 
 			get_tree().change_scene("res://scenes/levels/Level4.tscn")
+	elif GenreManager.current_level == 5:
+		if GenreManager.current_genre == 3:
+			get_tree().change_scene("res://scenes/levels/end.tscn")
+			GenreManager.current_genre = 0
+		else: 
+			get_tree().change_scene("res://scenes/levels/Level5.tscn")

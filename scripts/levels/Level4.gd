@@ -6,6 +6,7 @@ onready var platformer_e = $enemies/platformer
 onready var coins = $Enviroment/coins
 
 func _ready():
+	Global.Health = 10
 	GenreManager.current_level = 4
 	if GenreManager.current_genre == 0:
 		shooter_e.queue_free()
@@ -22,6 +23,3 @@ func _ready():
 		coins.queue_free()
 		color_swap.set_shader_param("color0", Color("333C83"))
 		color_swap.set_shader_param("color8", Color("FDAF75"))
-	elif GenreManager.current_genre == 2:
-		get_tree().change_scene("res://scenes/levels/Level3.tscn")
-		GenreManager.current_genre = 0

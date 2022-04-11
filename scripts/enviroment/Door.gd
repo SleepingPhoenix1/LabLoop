@@ -3,8 +3,10 @@ extends StaticBody2D
 export var open_by_button = false
 export var buttons_required = 2
 export var close_on_genre = true
+export var close_on_genre2 = false
 export var open_on_genre = true
 export var genre_number = 1 
+export var genre_number2 = 2
 export var starting_state = 0
 
 var close = false
@@ -16,6 +18,8 @@ func _ready():
 	elif starting_state == 1:
 		_open()
 	if close_on_genre and genre_number == GenreManager.current_genre:
+		_close()
+	if close_on_genre2 and genre_number2 == GenreManager.current_genre:
 		_close()
 		close = true
 	if open_on_genre and genre_number == GenreManager.current_genre:

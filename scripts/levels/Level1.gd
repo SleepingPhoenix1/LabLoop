@@ -7,7 +7,7 @@ onready var coins = $enviroment/coins
 
 func _ready():
 	Global.Health = 10
-	GenreManager.current_level = 3
+	GenreManager.current_level = 1
 	if GenreManager.current_genre == 0:
 		shooter_e.queue_free()
 		color_swap.set_shader_param("color0", Color("FFFA4D"))

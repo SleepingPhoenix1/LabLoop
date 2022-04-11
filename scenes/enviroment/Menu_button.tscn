@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://other/color_swap.tres" type="Material" id=1]
+[ext_resource path="res://sprites/wall_button.png" type="Texture" id=2]
+[ext_resource path="res://scenes/enviroment/Menu_button.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 5 )
+
+[node name="Menu_button" type="Area2D"]
+collision_layer = 128
+collision_mask = 36
+script = ExtResource( 3 )
+
+[node name="WallButton" type="Sprite" parent="."]
+material = ExtResource( 1 )
+rotation = -1.5708
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 36
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+
+[node name="Node2D" type="Node2D" parent="."]

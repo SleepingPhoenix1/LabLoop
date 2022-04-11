@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sprites/electric_stuff.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enviroment/electric_lamp.gd" type="Script" id=2]
@@ -7,6 +7,22 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 2 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
 [node name="ElectricLamp" type="StaticBody2D"]
 script = ExtResource( 2 )
 
@@ -14,16 +30,16 @@ script = ExtResource( 2 )
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
-[node name="ElectricStuff" type="Sprite" parent="."]
-material = ExtResource( 3 )
-texture = ExtResource( 1 )
-vframes = 2
-
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 0, 4 )
 
 [node name="Spawn_rate" type="Timer" parent="."]
 wait_time = 1.5
 autostart = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 3 )
+frames = SubResource( 4 )
+playing = true
 
 [connection signal="timeout" from="Spawn_rate" to="." method="_on_Spawn_rate_timeout"]
