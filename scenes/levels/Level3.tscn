@@ -236,7 +236,7 @@ position = Vector2( 382, 311 )
 
 [node name="Door" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 20 )
 open_by_button = true
 close_on_genre = false
@@ -255,7 +255,7 @@ shape = SubResource( 42 )
 
 [node name="Door2" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 20 )
 open_by_button = true
 buttons_required = 1
@@ -275,7 +275,7 @@ shape = SubResource( 2 )
 
 [node name="Door3" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 20 )
 open_by_button = true
 close_on_genre = false
@@ -294,7 +294,7 @@ shape = SubResource( 44 )
 
 [node name="Door4" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 20 )
 open_on_genre = false
 genre_number = 2
@@ -313,7 +313,7 @@ shape = SubResource( 43 )
 
 [node name="Door5" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 20 )
 open_by_button = true
 buttons_required = 3
@@ -333,7 +333,7 @@ shape = SubResource( 45 )
 
 [node name="Door6" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 20 )
 open_on_genre = false
 starting_state = 1

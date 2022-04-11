@@ -49,18 +49,16 @@ func _physics_process(delta):
 			get_parent().get_parent().add_child(ins)
 		queue_free()
 
-func check_player_in_detection() -> bool:
+func check_player_in_detection():
 	var collider = los.get_collider()
 	if collider and collider.is_in_group("Player"):
 		player_spotted = true
 		can_shoot = true
-		return true
 	else: 
 		player_spotted = false
 		path = []
 		velocity = Vector2.ZERO
 		can_shoot = false
-		return false
 
 func navigate():	# Define the next position to go to
 	if path.size() > 0:

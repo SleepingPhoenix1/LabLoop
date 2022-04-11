@@ -354,12 +354,36 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../fade_out:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../fade_out:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=45]
 resource_name = "fade_in"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("../fade_out:color")
+tracks/0/path = NodePath("../fade_out:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -368,14 +392,14 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=44]
 resource_name = "fade_out"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("../fade_out:color")
+tracks/0/path = NodePath("../fade_out:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -384,7 +408,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Theme" id=40]
@@ -515,20 +539,22 @@ texture = ExtResource( 6 )
 position = Vector2( 0, -32 )
 current = true
 
+[node name="fade" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera2D2")
+anims/RESET = SubResource( 43 )
+anims/fade_in = SubResource( 45 )
+anims/fade_out = SubResource( 44 )
+
 [node name="fade_out" type="ColorRect" parent="."]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 0, 0, 0, 1 )
+material = ExtResource( 5 )
 margin_left = -172.0
 margin_top = -129.0
 margin_right = 174.0
 margin_bottom = 74.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
-
-[node name="fade" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Camera2D2")
-anims/RESET = SubResource( 43 )
-anims/fade_in = SubResource( 45 )
-anims/fade_out = SubResource( 44 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = -161.0

@@ -2,6 +2,7 @@ extends Node
 
 var current_genre = 2
 
+var current_level = 1
 
 
 func _ready():

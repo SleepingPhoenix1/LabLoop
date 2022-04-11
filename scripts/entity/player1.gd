@@ -289,7 +289,7 @@ func movement_td():
 		$Particles2D.emitting = false
 	
 	
-	move_and_slide(velocity * _speed, Vector2.UP)
+	velocity = move_and_slide(velocity * _speed, Vector2.UP)
 
 
 func shooting():
@@ -305,10 +305,12 @@ func drag_n_drop():
 	pass
 
 func finish():
+	get_tree().change_scene("res://scenes/levels/transit_scene.tscn")
 	$fade.play("fade_in")
 
+func death():
+	$fade.play("fade_in")
 
 func _on_fade_animation_finished(anim_name):
 	if anim_name == "fade_in":
 		get_tree().reload_current_scene()
-		Global.coll_coins -= 30

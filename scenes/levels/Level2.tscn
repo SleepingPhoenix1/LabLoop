@@ -491,7 +491,7 @@ position = Vector2( -407, 236 )
 
 [node name="Door" type="StaticBody2D" parent="Doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 13 )
 open_on_genre = false
 genre_number = 2
@@ -510,7 +510,7 @@ shape = SubResource( 51 )
 
 [node name="Door2" type="StaticBody2D" parent="Doors"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 13 )
 open_on_genre = false
 genre_number = 2
@@ -534,7 +534,7 @@ door_ = NodePath("../Door3")
 [node name="Door3" type="StaticBody2D" parent="Doors"]
 position = Vector2( -275, 0 )
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
@@ -558,11 +558,12 @@ shape = SubResource( 48 )
 [node name="Door4" type="StaticBody2D" parent="Doors"]
 position = Vector2( -649, 32 )
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
+open_by_button = true
 close_on_genre = false
 open_on_genre = false
 genre_number = 2
@@ -581,7 +582,7 @@ shape = SubResource( 46 )
 [node name="Door5" type="StaticBody2D" parent="Doors"]
 position = Vector2( -297, -240 )
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
@@ -602,6 +603,6 @@ position = Vector2( 268, 192 )
 shape = SubResource( 46 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 145, 259 )
+position = Vector2( 140, 260 )
 
 [connection signal="body_entered" from="enviroment/Lazer" to="enviroment/Lazer" method="_on_Lazer_body_entered"]

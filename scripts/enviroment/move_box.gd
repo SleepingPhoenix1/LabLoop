@@ -2,10 +2,6 @@ extends Node2D
 
 var selected = false
 
-func _process(delta):
-	pass
-
-
 
 func _physics_process(delta):
 	if selected and GenreManager.current_genre == 2:
@@ -18,7 +14,7 @@ func _input(event):
 			selected = false
 
 
-func _on_area_input_event(viewport, event, shape_idx):
+func _on_area_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("shoot"):
 		selected = true
 		

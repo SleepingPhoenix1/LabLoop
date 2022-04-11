@@ -13,7 +13,8 @@ func instance_node(node, location, parent):
 	return node_inst
 
 
-func _process(delta):
+func _process(_delta):
 	if Health <= 0:
-		Player.finish()
+		coll_coins -= 30
+		Player.death()
 		Health = 10

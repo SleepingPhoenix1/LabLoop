@@ -7,15 +7,17 @@ export var open_on_genre = true
 export var genre_number = 1 
 export var starting_state = 0
 
-
+var close = false
 
 func _ready():
-	if starting_state == 0 and !open_by_button:
+	if starting_state == 0:
 		_close()
+		close = true
 	elif starting_state == 1:
 		_open()
 	if close_on_genre and genre_number == GenreManager.current_genre:
 		_close()
+		close = true
 	if open_on_genre and genre_number == GenreManager.current_genre:
 		_open()
 
@@ -23,7 +25,9 @@ func _ready():
 func _process(delta):
 	if buttons_required <=0 and open_by_button:
 		_open()
-	else: _close()
+	else: 
+		if open_by_button and close:
+			_close()
 
 func _open():
 	$CollisionShape2D.disabled = true

@@ -6,6 +6,7 @@ onready var platformer_e = $enemies/platformer
 onready var coins = $Enviroment/coins
 
 func _ready():
+	GenreManager.current_level = 4
 	if GenreManager.current_genre == 0:
 		shooter_e.queue_free()
 		color_swap.set_shader_param("color0", Color("FFFA4D"))

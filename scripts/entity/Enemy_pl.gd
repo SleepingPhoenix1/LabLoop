@@ -5,7 +5,7 @@ export var speed = 20
 var gravity = 10
 var sleeping = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Global.Player:
 		if $raycasts/RayCastLeft.get_collider() == Global.Player:
 			$SleepTimer.stop()
@@ -32,7 +32,7 @@ func _physics_process(delta):
 		velocity.y += gravity
 	else:
 		velocity.y = 1
-	move_and_slide(velocity, Vector2.UP)
+	velocity = move_and_slide(velocity, Vector2.UP)
 	$Robot.flip_h = true if velocity.x <0 else false
 
 func _on_DamageArea_body_entered(body):
