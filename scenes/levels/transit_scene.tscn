@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sprites/transition_anim/transit_1-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=2]
 [ext_resource path="res://scripts/levels/transit_scene.gd" type="Script" id=3]
+[ext_resource path="res://other/level_complete2.tres" type="Animation" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -87,7 +88,106 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
+resource_name = "level_complete3"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet3:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet3:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "fade_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "level_complete"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=9]
 resource_name = "level_complete2"
 length = 0.6
 tracks/0/type = "value"
@@ -103,7 +203,122 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=10]
+resource_name = "level_complete3"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet3:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet3:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "fade_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "level_complete"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "level_complete2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/Transit1-Sheet/Transit1-Sheet2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=15]
 resource_name = "level_complete3"
 length = 0.6
 tracks/0/type = "value"
@@ -171,8 +386,22 @@ anchor_bottom = 1.0
 anims/RESET = SubResource( 1 )
 anims/fade_in = SubResource( 5 )
 anims/level_complete = SubResource( 2 )
-anims/level_complete2 = SubResource( 3 )
+anims/level_complete2 = ExtResource( 4 )
 anims/level_complete3 = SubResource( 4 )
+
+[node name="LevelComplete_2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/fade_in = SubResource( 7 )
+anims/level_complete = SubResource( 8 )
+anims/level_complete2 = SubResource( 9 )
+anims/level_complete3 = SubResource( 10 )
+
+[node name="LevelComplete_3" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 11 )
+anims/fade_in = SubResource( 12 )
+anims/level_complete = SubResource( 13 )
+anims/level_complete2 = SubResource( 14 )
+anims/level_complete3 = SubResource( 15 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.8
@@ -180,4 +409,6 @@ one_shot = true
 autostart = true
 
 [connection signal="animation_finished" from="LevelComplete_1" to="." method="_on_LevelComplete_1_animation_finished"]
+[connection signal="animation_finished" from="LevelComplete_2" to="." method="_on_LevelComplete_1_animation_finished"]
+[connection signal="animation_finished" from="LevelComplete_3" to="." method="_on_LevelComplete_1_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

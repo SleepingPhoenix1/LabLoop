@@ -12,6 +12,8 @@ func _ready():
 		GenreManager.current_genre = 2
 	elif GenreManager.current_genre == 2:
 		$LevelComplete_1.play("level_complete3")
+		$LevelComplete_2.play("level_complete")
+		$LevelComplete_3.play("level_complete2")
 		GenreManager.current_genre = 3
 
 
