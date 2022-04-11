@@ -30,7 +30,7 @@ func explode():
 	$ElectricStuff.hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	velocity = Vector2.ZERO
-	is_exploiding = true
+	$Timer.start()
 
 
 
@@ -46,3 +46,7 @@ func _on_Area2D_body_entered(body):
 		explode()
 		if body.is_in_group("player"):
 			Global.Health -=1
+
+
+func _on_Timer_timeout():
+	queue_free()

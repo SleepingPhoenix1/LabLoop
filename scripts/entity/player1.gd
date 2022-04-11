@@ -210,6 +210,8 @@ func get_gravity() -> float:  #sets gravity type
 func jump(): #jumping
 	velocity.y = jump_velocity
 	jump_buffer = false
+	$SoundPlayer.stream = preload("res://sound/Lab_Loop_Jump_v1a.wav")
+	$SoundPlayer.play()
 
 
 
@@ -309,3 +311,4 @@ func finish():
 func _on_fade_animation_finished(anim_name):
 	if anim_name == "fade_in":
 		get_tree().reload_current_scene()
+		Global.coll_coins -= 30

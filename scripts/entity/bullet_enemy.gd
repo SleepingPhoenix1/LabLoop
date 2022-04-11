@@ -15,8 +15,6 @@ func _process(delta):
 		look_once = false
 		$Explosion.start()
 	global_position += velocity.rotated(rotation) * speed * delta
-	if !$explosion.emitting and is_exploiding:
-		queue_free()
 	
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -27,7 +25,7 @@ func explode():
 	$Bullet.hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	velocity = Vector2.ZERO
-	is_exploiding = true
+	$Timer.start()
 
 func _on_Explosion_timeout():
 	explode()
@@ -37,3 +35,7 @@ func _on_Area2D_body_entered(body):
 	explode()
 	if body.is_in_group("player"):
 		Global.Health -=1
+
+
+func _on_Timer_timeout():
+	queue_free()

@@ -42,6 +42,11 @@ explosiveness = 1.0
 process_material = ExtResource( 5 )
 texture = ExtResource( 4 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Explosion" to="." method="_on_Explosion_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

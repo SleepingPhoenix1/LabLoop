@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://other/color_swap.tres" type="Material" id=1]
 [ext_resource path="res://other/Level.tres" type="TileSet" id=2]
@@ -18,44 +18,8 @@
 [ext_resource path="res://scenes/enviroment/box_right.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/enviroment/box_left.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/enviroment/electric_lamp.tscn" type="PackedScene" id=18]
-
-[sub_resource type="GDScript" id=38]
-script/source = "extends StaticBody2D
-
-export var open_by_button = false
-export var buttons_required = 2
-export var close_on_genre = true
-export var open_on_genre = true
-export var genre_number = 1 
-export var starting_state = 0
-
-
-
-
-func _ready():
-	if starting_state == 0 and !open_by_button:
-		_close()
-	elif starting_state == 1:
-		_open()
-	if close_on_genre and genre_number == GenreManager.current_genre:
-		_close()
-	if open_on_genre and genre_number == GenreManager.current_genre:
-		_open()
-
-
-func _process(delta):
-	if buttons_required <=0:
-		_open()
-	
-
-func _open():
-	$CollisionShape2D.disabled = true
-	$TileMap.hide()
-
-func _close():
-	$CollisionShape2D.disabled = false
-	$TileMap.show()
-"
+[ext_resource path="res://scenes/enviroment/wall_button.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scripts/enviroment/Door.gd" type="Script" id=20]
 
 [sub_resource type="TileSet" id=1]
 0/name = "door.png 0"
@@ -196,10 +160,10 @@ position = Vector2( 240, 142 )
 position = Vector2( 245, 111 )
 
 [node name="KinematicBody2D4" parent="enemies/shooter" instance=ExtResource( 12 )]
-position = Vector2( 23, 162 )
+position = Vector2( 21, 148 )
 
 [node name="KinematicBody2D5" parent="enemies/shooter" instance=ExtResource( 12 )]
-position = Vector2( 29, 112 )
+position = Vector2( 28, 111 )
 
 [node name="KinematicBody2D6" parent="enemies/shooter" instance=ExtResource( 12 )]
 position = Vector2( 102, 57 )
@@ -212,6 +176,12 @@ position = Vector2( -112, 22 )
 
 [node name="KinematicBody2D9" parent="enemies/shooter" instance=ExtResource( 12 )]
 position = Vector2( -188, -30 )
+
+[node name="KinematicBody2D13" parent="enemies/shooter" instance=ExtResource( 12 )]
+position = Vector2( -158, -44 )
+
+[node name="KinematicBody2D14" parent="enemies/shooter" instance=ExtResource( 12 )]
+position = Vector2( -72, -60 )
 
 [node name="KinematicBody2D10" parent="enemies/shooter" instance=ExtResource( 12 )]
 position = Vector2( -114, -90 )
@@ -267,7 +237,8 @@ position = Vector2( 382, 311 )
 [node name="Door" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
 collision_mask = 6
-script = SubResource( 38 )
+script = ExtResource( 20 )
+open_by_button = true
 close_on_genre = false
 open_on_genre = false
 
@@ -285,8 +256,11 @@ shape = SubResource( 42 )
 [node name="Door2" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
 collision_mask = 6
-script = SubResource( 38 )
+script = ExtResource( 20 )
+open_by_button = true
+buttons_required = 1
 close_on_genre = false
+open_on_genre = false
 
 [node name="TileMap" type="TileMap" parent="enviroment/doors/Door2"]
 material = ExtResource( 1 )
@@ -302,7 +276,7 @@ shape = SubResource( 2 )
 [node name="Door3" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
 collision_mask = 6
-script = SubResource( 38 )
+script = ExtResource( 20 )
 open_by_button = true
 close_on_genre = false
 open_on_genre = false
@@ -321,7 +295,7 @@ shape = SubResource( 44 )
 [node name="Door4" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
 collision_mask = 6
-script = SubResource( 38 )
+script = ExtResource( 20 )
 open_on_genre = false
 genre_number = 2
 starting_state = 1
@@ -340,10 +314,11 @@ shape = SubResource( 43 )
 [node name="Door5" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
 collision_mask = 6
-script = SubResource( 38 )
+script = ExtResource( 20 )
+open_by_button = true
+buttons_required = 3
 close_on_genre = false
 open_on_genre = false
-genre_number = 2
 
 [node name="TileMap" type="TileMap" parent="enviroment/doors/Door5"]
 material = ExtResource( 1 )
@@ -359,7 +334,7 @@ shape = SubResource( 45 )
 [node name="Door6" type="StaticBody2D" parent="enviroment/doors"]
 collision_layer = 0
 collision_mask = 6
-script = SubResource( 38 )
+script = ExtResource( 20 )
 open_on_genre = false
 starting_state = 1
 
@@ -528,8 +503,16 @@ collision_mask = 36
 position = Vector2( 0, 1 )
 shape = SubResource( 41 )
 
+[node name="wall_button3" parent="enviroment/buttons" instance=ExtResource( 19 )]
+position = Vector2( -66, -118 )
+door = NodePath("../../doors/Door2")
+
 [node name="Area2D" parent="enviroment/buttons" instance=ExtResource( 14 )]
-position = Vector2( 106, 10 )
+position = Vector2( 104, 15 )
+door_ = NodePath("../../doors/Door3")
+
+[node name="Area2D2" parent="enviroment/buttons" instance=ExtResource( 14 )]
+position = Vector2( 212, 14 )
 door_ = NodePath("../../doors/Door3")
 
 [node name="box" parent="enviroment" instance=ExtResource( 13 )]
@@ -546,6 +529,10 @@ position = Vector2( 307, 76 )
 [node name="charge_catcher" parent="enviroment/charge_catrchers" instance=ExtResource( 6 )]
 position = Vector2( 227, -164 )
 rotation = 3.14159
+door = NodePath("../../doors/Door5")
+
+[node name="charge_catcher3" parent="enviroment/charge_catrchers" instance=ExtResource( 6 )]
+position = Vector2( 193, -51 )
 door = NodePath("../../doors/Door5")
 
 [node name="charge_catcher2" parent="enviroment/charge_catrchers" instance=ExtResource( 6 )]

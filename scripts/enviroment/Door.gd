@@ -9,7 +9,6 @@ export var starting_state = 0
 
 
 
-
 func _ready():
 	if starting_state == 0 and !open_by_button:
 		_close()
@@ -22,9 +21,9 @@ func _ready():
 
 
 func _process(delta):
-	if buttons_required <=0:
+	if buttons_required <=0 and open_by_button:
 		_open()
-	
+	else: _close()
 
 func _open():
 	$CollisionShape2D.disabled = true
@@ -33,3 +32,5 @@ func _open():
 func _close():
 	$CollisionShape2D.disabled = false
 	$TileMap.show()
+
+

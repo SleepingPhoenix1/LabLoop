@@ -1,12 +1,26 @@
 extends Area2D
 
 export (NodePath) var door_
+var door
+func _ready():
+	door = get_node(door_)
 
-func _process(delta):
-	if door_:
-		var door = get_node(door_)
-		if get_overlapping_bodies() != []:
-			door._open()
-		elif get_overlapping_areas() != []:
-			door._open()
-		else: door._close()
+
+func _on_Area2D_area_entered(area):
+	if door and get_overlapping_areas().size()==1:
+		door.buttons_required -=1
+
+
+func _on_Area2D_area_exited(area):
+	if door and get_overlapping_areas().size() == 0:
+		door.buttons_required +=1
+
+
+func _on_Area2D_body_entered(body):
+	if door and get_overlapping_bodies().size()==1:
+		door.buttons_required -=1
+
+
+func _on_Area2D_body_exited(body):
+	if door and get_overlapping_bodies().size() == 0:
+		door.buttons_required +=1

@@ -21,3 +21,8 @@ material = ExtResource( 3 )
 texture = ExtResource( 1 )
 vframes = 2
 frame = 1
+
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Area2D_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Area2D_body_exited"]

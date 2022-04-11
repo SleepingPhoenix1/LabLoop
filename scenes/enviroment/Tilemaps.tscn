@@ -251,7 +251,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/z_index = 0
 
 [node name="Navigation2D" type="Navigation2D" groups=["LevelNavigation"]]
-position = Vector2( 16, -104 )
 
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 3 )
