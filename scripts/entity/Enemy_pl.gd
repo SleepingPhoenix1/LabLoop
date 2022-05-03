@@ -35,8 +35,8 @@ func _physics_process(_delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 	$Robot.flip_h = true if velocity.x <0 else false
 
-func _on_DamageArea_body_entered(body):
-	Global.Health -=1
+func _on_DamageArea_body_entered(_body):
+	Global.hurt()
 	
 
 

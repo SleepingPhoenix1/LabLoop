@@ -340,6 +340,9 @@ tile_data = PoolIntArray( 393230, 1, 65537, 393231, 1, 0, 393232, 1, 0, 393233, 
 position = Vector2( 160, 52 )
 shape = SubResource( 38 )
 
+[node name="Sound" type="AudioStreamPlayer" parent="Enviroment/doors/Door"]
+volume_db = -15.0
+
 [node name="Door2" type="StaticBody2D" parent="Enviroment/doors"]
 collision_layer = 0
 collision_mask = 38
@@ -349,6 +352,7 @@ buttons_required = 1
 open_on_genre = false
 genre_number = 2
 starting_state = 1
+_print = true
 
 [node name="TileMap" type="TileMap" parent="Enviroment/doors/Door2"]
 material = ExtResource( 3 )
@@ -360,6 +364,9 @@ tile_data = PoolIntArray( 589817, 0, 0, 655353, 0, 65536, 720889, 0, 65536, 7864
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/doors/Door2"]
 position = Vector2( -52, 84 )
 shape = SubResource( 2 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="Enviroment/doors/Door2"]
+volume_db = -15.0
 
 [node name="Door4" type="StaticBody2D" parent="Enviroment/doors"]
 collision_layer = 0
@@ -382,6 +389,9 @@ tile_data = PoolIntArray( -196617, 0, 0, -131081, 0, 65536, -65545, 0, 1 )
 position = Vector2( -68, -20 )
 shape = SubResource( 40 )
 
+[node name="Sound" type="AudioStreamPlayer" parent="Enviroment/doors/Door4"]
+volume_db = -15.0
+
 [node name="Door6" type="StaticBody2D" parent="Enviroment/doors"]
 collision_layer = 0
 collision_mask = 38
@@ -402,6 +412,9 @@ tile_data = PoolIntArray( -262096, 0, 0, -196560, 0, 65536, -131024, 0, 65536, -
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/doors/Door6"]
 position = Vector2( 388, -16 )
 shape = SubResource( 42 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="Enviroment/doors/Door6"]
+volume_db = -15.0
 
 [node name="Door5" type="StaticBody2D" parent="Enviroment/doors"]
 collision_layer = 0
@@ -424,6 +437,9 @@ tile_data = PoolIntArray( -2097149, 0, 0, -2097145, 0, 0, -2031613, 0, 1, -20316
 position = Vector2( 44, -247 )
 shape = SubResource( 41 )
 
+[node name="Sound" type="AudioStreamPlayer" parent="Enviroment/doors/Door5"]
+volume_db = -15.0
+
 [node name="Door3" type="StaticBody2D" parent="Enviroment/doors"]
 collision_layer = 0
 collision_mask = 38
@@ -444,6 +460,9 @@ tile_data = PoolIntArray( 458799, 0, 0, 524335, 0, 65536, 589871, 0, 65536, 6554
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/doors/Door3"]
 position = Vector2( 380, 76 )
 shape = SubResource( 39 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="Enviroment/doors/Door3"]
+volume_db = -15.0
 
 [node name="buttons" type="Node2D" parent="Enviroment"]
 

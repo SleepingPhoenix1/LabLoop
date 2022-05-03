@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Labloop_Platformer_v1.mp3-d309c911029a3a60f714d412e9c94f2a.mp3str"
+
+[deps]
+
+source_file="res://sound/Labloop_Platformer_v1.mp3"
+dest_files=[ "res://.import/Labloop_Platformer_v1.mp3-d309c911029a3a60f714d412e9c94f2a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

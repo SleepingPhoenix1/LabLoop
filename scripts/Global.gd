@@ -12,9 +12,15 @@ func instance_node(node, location, parent):
 	node_inst.global_position = location
 	return node_inst
 
+func hurt():
+	Health -=1
+	Player.hurt()
 
 func _process(_delta):
 	if Health <= 0:
-		coll_coins -= 30
+		coll_coins -= 15
 		Player.death()
+		Health = 10
+	
+	if Health > 10:
 		Health = 10

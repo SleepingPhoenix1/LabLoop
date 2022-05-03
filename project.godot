@@ -11,17 +11,16 @@ config_version=4
 [application]
 
 config/name="LabLoop"
-run/main_scene="res://scenes/levels/Level1.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/levels/Main menu.tscn"
+boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://sprites/Player.png"
 
 [autoload]
 
 GenreManager="*res://scripts/GenreManager.gd"
 Global="*res://scripts/Global.gd"
-
-[debug]
-
-settings/fps/force_fps=60
+SoundManager="*res://scenes/levels/SoundManager.tscn"
 
 [display]
 
@@ -29,7 +28,7 @@ window/size/width=320
 window/size/height=180
 window/size/test_width=1280
 window/size/test_height=720
-window/stretch/mode="2d"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
 [importer_defaults]
@@ -101,6 +100,11 @@ dash={
 shoot={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+esc={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

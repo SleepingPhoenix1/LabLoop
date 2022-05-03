@@ -60,6 +60,19 @@ func _ready():
 	$fade.play("fade_out")
 	max_speed = export_max_speed
 	deceleration = export_deceleration
+	
+	if GenreManager.current_genre == 0:
+		Input.set_custom_mouse_cursor(null)
+		$Control/shooter.hide()
+		$Control/puzzle.hide()
+	elif GenreManager.current_genre == 1:
+		Input.set_custom_mouse_cursor(load("res://sprites/cursor_shooter.png"), Input.CURSOR_ARROW, Vector2(12,12))
+		$Control/platformer.hide()
+		$Control/puzzle.hide()
+	elif GenreManager.current_genre == 2:
+		$Control/platformer.hide()
+		$Control/shooter.hide()
+		Input.set_custom_mouse_cursor(load("res://sprites/cursor_puzzle_1.png"), Input.CURSOR_ARROW, Vector2(12,12))
 
 func _process(delta):
 	Global.Player = self
@@ -67,7 +80,15 @@ func _process(delta):
 		max_speed = export_max_speed
 		has_jumped = false
 		tick = false
-	$RichTextLabel.text = str(Global.coll_coins)
+	$platformer.text = str(Global.coll_coins)
+	$shooter.text = str(Global.coll_coins)
+	$puzzle.text = str(Global.coll_coins)
+	
+	if Input.is_action_just_pressed("esc"):
+		get_tree().change_scene("res://scenes/levels/Main menu.tscn")
+	
+	
+	
 	
 	###### GRAVITY ######
 	if !is_on_floor():
@@ -82,7 +103,9 @@ func _process(delta):
 		
 	
 	## health manager ##
-	$Control/ProgressBar.value = Global.Health
+	$Control/platformer.value = Global.Health
+	$Control/shooter.value = Global.Health
+	$Control/puzzle.value = Global.Health
 	
 
 
@@ -95,18 +118,24 @@ func _physics_process(_delta):
 		$PlayerAShoot.hide()
 		$AnimationTree.active = false
 		$Player.show()
+		$shooter.hide()
+		$puzzle.hide()
 	elif GenreManager.current_genre == 1:
 		movement_td()
 		shooting()
 		$PlayerAShoot.show()
 		$AnimationTree.active = true
 		$Player.hide()
+		$platformer.hide()
+		$puzzle.hide()
 	elif GenreManager.current_genre ==2:
 		movement_td()
 		drag_n_drop()
 		$PlayerAShoot.show()
 		$AnimationTree.active = true
 		$Player.hide()
+		$platformer.hide()
+		$shooter.hide()
 	#print(has_jumped)
 	
 
@@ -210,7 +239,7 @@ func get_gravity() -> float:  #sets gravity type
 func jump(): #jumping
 	velocity.y = jump_velocity
 	jump_buffer = false
-	$SoundPlayer.stream = preload("res://sound/Lab_Loop_Jump_v1a.wav")
+	$SoundPlayer.stream = load("res://sound/Lab_Loop_Jump_v1a.wav")
 	$SoundPlayer.play()
 
 
@@ -237,7 +266,8 @@ func workarounds():
 	if !is_on_floor() and has_pressed_jump:
 		has_jumped = true
 	
-
+	
+	
 
 
 
@@ -298,7 +328,7 @@ func shooting():
 		Global.instance_node(Bullet, Bullet_position, get_parent())
 		randomize()
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
-		$SoundPlayer.stream = preload("res://sound/Lab_Loop_Sound_FX_Pistol.wav")
+		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
 		$SoundPlayer.play()
 
 func drag_n_drop():
@@ -314,3 +344,10 @@ func death():
 func _on_fade_animation_finished(anim_name):
 	if anim_name == "fade_in":
 		get_tree().reload_current_scene()
+
+
+func hurt():
+	$SoundPlayer.stream = load("res://sound/hurt.wav")
+	$SoundPlayer.play()
+
+

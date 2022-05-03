@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Lab_Loop_Shooter_v1a_Loopable.mp3-1e4f9ab88209300d71c09e77bbe79318.mp3str"
+
+[deps]
+
+source_file="res://sound/Lab_Loop_Shooter_v1a_Loopable.mp3"
+dest_files=[ "res://.import/Lab_Loop_Shooter_v1a_Loopable.mp3-1e4f9ab88209300d71c09e77bbe79318.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

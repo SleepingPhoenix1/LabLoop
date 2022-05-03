@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/wall_button.png" type="Texture" id=1]
 [ext_resource path="res://scenes/enviroment/wall_button.gd" type="Script" id=2]
@@ -6,9 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 41, 25 )
 
 [node name="wall_button" type="Area2D"]
 collision_layer = 128
@@ -24,14 +21,6 @@ hframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 19 )
-shape = SubResource( 2 )
 
 [node name="Area2D2" type="Area2D" parent="."]
 collision_layer = 128

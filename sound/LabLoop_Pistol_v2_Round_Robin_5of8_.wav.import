@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/LabLoop_Pistol_v2_Round_Robin_5of8_.wav-350b87e0ff3197ccb03f842eb29248e9.sample"
+
+[deps]
+
+source_file="res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav"
+dest_files=[ "res://.import/LabLoop_Pistol_v2_Round_Robin_5of8_.wav-350b87e0ff3197ccb03f842eb29248e9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

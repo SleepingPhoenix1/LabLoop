@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Labloop_Puzzle_v1.mp3-4fe78262a9b2bd1d72a11e0466fba393.mp3str"
+
+[deps]
+
+source_file="res://sound/Labloop_Puzzle_v1.mp3"
+dest_files=[ "res://.import/Labloop_Puzzle_v1.mp3-4fe78262a9b2bd1d72a11e0466fba393.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

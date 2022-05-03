@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://other/color_swap.tres" type="Material" id=1]
 [ext_resource path="res://scripts/enviroment/atom_coin.gd" type="Script" id=2]
 [ext_resource path="res://sprites/coin.png" type="Texture" id=3]
+[ext_resource path="res://sound/coin.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.5, 4 )
@@ -44,7 +45,11 @@ shape = SubResource( 1 )
 material = ExtResource( 1 )
 position = Vector2( 2, -8 )
 frames = SubResource( 6 )
-frame = 2
 playing = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
+
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

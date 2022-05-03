@@ -16,8 +16,8 @@ onready var AnimState = AnimTree.get("parameters/playback")
 
 var player_direction = Vector2()
 var can_shoot = false
-onready var Bullet_e = preload("res://scenes/entity/bullet_enemy.tscn")
-onready var health_p = preload("res://scenes/enviroment/health_pot.tscn")
+onready var Bullet_e = load("res://scenes/entity/bullet_enemy.tscn")
+onready var health_p = load("res://scenes/enviroment/health_pot.tscn")
 
 
 
@@ -29,7 +29,7 @@ func _ready():
 	if tree.has_group("Player"):
 		player = tree.get_nodes_in_group("Player")[0]
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	line2d.global_position = Vector2.ZERO
 	if player:
 		los.look_at(player.global_position)
@@ -43,7 +43,7 @@ func _physics_process(delta):
 	#health
 	if health <= 0:
 		Global.coll_coins += 3
-		if rand_range(0,5) < 1:
+		if rand_range(0,6) < 1:
 			var ins = health_p.instance()
 			ins.global_position = global_position
 			get_parent().get_parent().add_child(ins)
@@ -85,10 +85,15 @@ func move():
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Bullet"):
 		health -=1
+		$SoundPlayer.stream = load("res://sound/hurt.wav")
+		$SoundPlayer.play()
 		area.explode()
 
 
 func _on_shoot_timer_timeout():
 	if can_shoot:
 		Global.instance_node(Bullet_e, global_position, get_parent())
+		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
+		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
+		$SoundPlayer.play()
 

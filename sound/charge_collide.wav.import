@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/charge_collide.wav-b128a206a56a16c3eeaaa3394d8632d3.sample"
+
+[deps]
+
+source_file="res://sound/charge_collide.wav"
+dest_files=[ "res://.import/charge_collide.wav-b128a206a56a16c3eeaaa3394d8632d3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

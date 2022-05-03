@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-onready var charge = preload("res://scenes/entity/electric_charge.tscn")
+onready var charge = load("res://scenes/entity/electric_charge.tscn")
 
 func _ready():
 	pass

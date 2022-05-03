@@ -9,7 +9,7 @@ extents = Vector2( 7, 5 )
 
 [node name="Menu_button" type="Area2D"]
 collision_layer = 128
-collision_mask = 36
+collision_mask = 4
 script = ExtResource( 3 )
 
 [node name="WallButton" type="Sprite" parent="."]
@@ -22,12 +22,6 @@ hframes = 2
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
-[node name="Area2D2" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 36
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2( 0, 1 )
-shape = SubResource( 1 )
-
 [node name="Node2D" type="Node2D" parent="."]
+
+[connection signal="body_exited" from="." to="." method="_on_Menu_button_body_exited"]

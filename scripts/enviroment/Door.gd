@@ -8,6 +8,8 @@ export var open_on_genre = true
 export var genre_number = 1 
 export var genre_number2 = 2
 export var starting_state = 0
+export var _print = false
+
 
 var close = false
 
@@ -19,6 +21,7 @@ func _ready():
 		_open()
 	if close_on_genre and genre_number == GenreManager.current_genre:
 		_close()
+		close = true
 	if close_on_genre2 and genre_number2 == GenreManager.current_genre:
 		_close()
 		close = true
@@ -26,7 +29,9 @@ func _ready():
 		_open()
 
 
-func _process(delta):
+func _process(_delta):
+	if _print:
+		print(buttons_required)
 	if buttons_required <=0 and open_by_button:
 		_open()
 	else: 

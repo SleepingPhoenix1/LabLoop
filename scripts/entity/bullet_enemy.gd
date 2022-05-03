@@ -34,7 +34,7 @@ func _on_Explosion_timeout():
 func _on_Area2D_body_entered(body):
 	explode()
 	if body.is_in_group("player"):
-		Global.Health -=1
+		Global.hurt()
 
 
 func _on_Timer_timeout():

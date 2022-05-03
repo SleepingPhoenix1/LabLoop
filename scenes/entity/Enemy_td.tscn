@@ -278,5 +278,8 @@ parameters/playback = SubResource( 25 )
 parameters/idle/blend_position = Vector2( 0, 0 )
 parameters/walk/blend_position = Vector2( 0, 0 )
 
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

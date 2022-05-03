@@ -28,7 +28,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 func explode():
 	$explosion.emitting = true
 	$ElectricStuff.hide()
-	$CollisionShape2D.set_deferred("disabled", true)
+	set_deferred("monitoring", false)
 	velocity = Vector2.ZERO
 	$Timer.start()
 
@@ -44,8 +44,11 @@ func _on_Area2D_body_entered(body):
 		explode()
 	else:
 		explode()
+		$SoundPlayer.stream = load("res://sound/charge_collide.wav")
+		$SoundPlayer.play()
 		if body.is_in_group("player"):
-			Global.Health -=1
+			Global.hurt()
+			
 
 
 func _on_Timer_timeout():
