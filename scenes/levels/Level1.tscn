@@ -473,6 +473,6 @@ position = Vector2( 101, -67 )
 position = Vector2( -257, 260 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 643, 182 )
+position = Vector2( 118, 322 )
 
 [connection signal="body_entered" from="enviroment/Lazers/Lazer" to="enviroment/Lazers/Lazer" method="_on_Lazer_body_entered"]

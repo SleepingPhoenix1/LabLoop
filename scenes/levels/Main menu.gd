@@ -14,6 +14,7 @@ func _ready():
 	elif GenreManager.current_genre == 1:
 		color_swap.set_shader_param("color0", Color("333C83"))
 		color_swap.set_shader_param("color8", Color("F24A72"))
+		color_swap.set_shader_param("color5", Color("b82c4d"))
 		if !SoundManager.stream == load("res://sound/Lab_Loop_Shooter_v1a_Loopable.mp3"):
 			SoundManager.play_music(1)
 		$Platformer.hide()
@@ -21,6 +22,7 @@ func _ready():
 	elif GenreManager.current_genre == 2:
 		color_swap.set_shader_param("color0", Color("333C83"))
 		color_swap.set_shader_param("color8", Color("FDAF75"))
+		color_swap.set_shader_param("color5", Color("e0945a"))
 		if !SoundManager.stream == load("res://sound/Labloop_Puzzle_v1.mp3"):
 			SoundManager.play_music(2)
 		$Platformer.hide()
