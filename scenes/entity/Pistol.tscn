@@ -11,3 +11,5 @@ script = ExtResource( 2 )
 material = ExtResource( 3 )
 position = Vector2( 12, 0 )
 texture = ExtResource( 1 )
+
+[node name="shoot_pos" type="Position2D" parent="Sprite"]

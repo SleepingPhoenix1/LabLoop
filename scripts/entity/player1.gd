@@ -50,6 +50,7 @@ var selected = false
 #shooter genre
 var Bullet_position
 onready var pistol = preload("res://scenes/entity/Pistol.tscn")
+var pist_inst
 onready var AnimTree = $AnimationTree
 onready var AnimState = AnimTree.get("parameters/playback")
 
@@ -70,7 +71,8 @@ func _ready():
 		Input.set_custom_mouse_cursor(load("res://sprites/cursor_shooter.png"), Input.CURSOR_ARROW, Vector2(12,12))
 		$Control/platformer.hide()
 		$Control/puzzle.hide()
-		add_child(pistol.instance())
+		pist_inst = pistol.instance()
+		add_child(pist_inst)
 	elif GenreManager.current_genre == 2:
 		$Control/platformer.hide()
 		$Control/shooter.hide()
@@ -197,7 +199,13 @@ func movement():
 	else:
 		$Particles2D.emitting = false
 	
-	
+	#if shift is pressed I increase max speed and if its released i decrease it
+	if Input.is_action_just_pressed("run"):
+		max_speed += 40
+		$AnimationPlayer.playback_speed = 1.1
+	elif Input.is_action_just_released("run"):
+		max_speed -= 40
+		$AnimationPlayer.playback_speed = 0.8
 	
 	
 	##### COYOTE TIMER #####
@@ -341,7 +349,7 @@ func movement_td():
 
 
 func shooting():
-	Bullet_position = $Position2D.global_position
+	Bullet_position = pist_inst._global_position
 	if Input.is_action_just_pressed("shoot"):
 		Global.instance_node(Bullet, Bullet_position, get_parent())
 		randomize()
