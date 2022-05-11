@@ -49,6 +49,7 @@ var selected = false
 
 #shooter genre
 var Bullet_position
+onready var pistol = preload("res://scenes/entity/Pistol.tscn")
 onready var AnimTree = $AnimationTree
 onready var AnimState = AnimTree.get("parameters/playback")
 
@@ -69,6 +70,7 @@ func _ready():
 		Input.set_custom_mouse_cursor(load("res://sprites/cursor_shooter.png"), Input.CURSOR_ARROW, Vector2(12,12))
 		$Control/platformer.hide()
 		$Control/puzzle.hide()
+		add_child(pistol.instance())
 	elif GenreManager.current_genre == 2:
 		$Control/platformer.hide()
 		$Control/shooter.hide()
@@ -87,7 +89,28 @@ func _process(delta):
 	if Input.is_action_just_pressed("esc"):
 		get_tree().change_scene("res://scenes/levels/Main menu.tscn")
 	
-	
+	#adjusting stuff for different genres
+	if GenreManager.current_genre == 0:
+		movement()
+		animations()
+		jump_manager()
+		$AnimationTree.active = false
+		$shooter.hide()
+		$puzzle.hide()
+	elif GenreManager.current_genre == 1:
+		movement_td()
+		shooting()
+		animations_td()
+		$AnimationTree.active = true
+		$platformer.hide()
+		$puzzle.hide()
+	elif GenreManager.current_genre ==2:
+		movement_td()
+		drag_n_drop()
+		animations_td()
+		$AnimationTree.active = true
+		$platformer.hide()
+		$shooter.hide()
 	
 	
 	###### GRAVITY ######
@@ -111,31 +134,7 @@ func _process(delta):
 
 
 func _physics_process(_delta):
-	if GenreManager.current_genre == 0:
-		movement()
-		animations()
-		jump_manager()
-		$PlayerAShoot.hide()
-		$AnimationTree.active = false
-		$Player.show()
-		$shooter.hide()
-		$puzzle.hide()
-	elif GenreManager.current_genre == 1:
-		movement_td()
-		shooting()
-		$PlayerAShoot.show()
-		$AnimationTree.active = true
-		$Player.hide()
-		$platformer.hide()
-		$puzzle.hide()
-	elif GenreManager.current_genre ==2:
-		movement_td()
-		drag_n_drop()
-		$PlayerAShoot.show()
-		$AnimationTree.active = true
-		$Player.hide()
-		$platformer.hide()
-		$shooter.hide()
+	pass
 	#print(has_jumped)
 	
 
@@ -281,7 +280,6 @@ func animations():  #add animations here
 		$AnimationPlayer.play("walk")
 	elif is_on_floor() and velocity.x == 0: 
 		$AnimationPlayer.play("idle")
-		
 	
 	#sprite rotation
 	if direction == -1:
@@ -305,17 +303,37 @@ func animations():  #add animations here
 		$"Scale manager".play("land")
 		landing = false
 
+func animations_td():  #add animations here
+	#walking
+	if Input.is_action_pressed("left"):
+		$AnimationPlayer.play("walk")
+	elif Input.is_action_pressed("right"):
+		$AnimationPlayer.play("walk")
+	elif Input.is_action_pressed("up"):
+		$AnimationPlayer.play("walk")
+	elif Input.is_action_pressed("down"):
+		$AnimationPlayer.play("walk")
+	else:
+		$AnimationPlayer.play("idle")
+	
+	#sprite rotation
+	if direction == -1:
+		$Player.flip_h = true
+	elif direction == 1:
+		$Player.flip_h = false
+
+
 func movement_td():
 	velocity.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	velocity.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	if Input.is_action_just_pressed("left"):
+		direction = -1
+	elif Input.is_action_just_pressed("right"):
+		direction = 1
 	velocity = velocity.normalized()
 	if velocity != Vector2.ZERO:
 		$Particles2D.emitting = true
-		AnimTree.set("parameters/idle/blend_position", velocity)
-		AnimTree.set("parameters/walk/blend_position", velocity)
-		AnimState.travel("walk")
 	else:
-		AnimState.travel("idle")
 		$Particles2D.emitting = false
 	
 	
