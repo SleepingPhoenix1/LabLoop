@@ -43,7 +43,7 @@ func _physics_process(_delta):
 	#health
 	if health <= 0:
 		Global.coll_coins += 3
-		Global.Player._screen_shake(60,0.1)
+		Global.Player._screen_shake(60,0.1,true)
 		SoundManager.play_sound(load("res://sound/robot_explosion.wav"))
 		if rand_range(0,6) < 1:
 			var ins = health_p.instance()

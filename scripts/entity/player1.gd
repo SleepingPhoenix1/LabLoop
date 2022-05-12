@@ -354,8 +354,9 @@ func movement_td():
 	velocity = move_and_slide(velocity * _speed, Vector2.UP)
 
 
-func _screen_shake(intensity,time):
-	camera.zoom = Vector2(1,1) - Vector2(intensity * 0.003, intensity * 0.003)
+func _screen_shake(intensity,time,zoom):
+	if zoom:
+		camera.zoom = Vector2(1,1) - Vector2(intensity * 0.003, intensity * 0.003)
 	shake_intensity = intensity
 	$Camera/Screen_shake_time.wait_time = time
 	$Camera/Screen_shake_time.start()
@@ -369,6 +370,8 @@ func shooting():
 	if Input.is_action_just_pressed("shoot"):
 		Global.instance_node(Bullet, Bullet_position, get_parent())
 		randomize()
+		_screen_shake(30,0.1,false)
+		pist_inst.get_node("smoke").restart()
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
 		$SoundPlayer.play()
