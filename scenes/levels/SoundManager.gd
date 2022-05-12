@@ -16,3 +16,7 @@ func play_music(id):
 		play()
 	elif id == 3:
 		stop()
+
+func play_sound(sound):
+	$SomeAudioPlayer.stream = sound
+	$SomeAudioPlayer.play()

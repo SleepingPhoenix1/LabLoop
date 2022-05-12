@@ -1,6 +1,7 @@
 extends Node
 
 var Player = null
+var _Camera = null
 var Health = 10
 var selected = false
 

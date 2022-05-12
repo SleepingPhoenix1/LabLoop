@@ -51,13 +51,21 @@ var selected = false
 var Bullet_position
 onready var pistol = preload("res://scenes/entity/Pistol.tscn")
 var pist_inst
-onready var AnimTree = $AnimationTree
-onready var AnimState = AnimTree.get("parameters/playback")
+
+#screen shake 
+var screen_shake_start = false
+var shake_intensity = 0
 
 #instances
 onready var Bullet = preload("res://scenes/entity/bullet.tscn")
 
+
+#node references
+onready var camera = $Camera
+
 func _ready():
+	Global.Player = self
+	Global._Camera = camera
 	$fade_out.show()
 	$fade.play("fade_out")
 	max_speed = export_max_speed
@@ -79,9 +87,8 @@ func _ready():
 		Input.set_custom_mouse_cursor(load("res://sprites/cursor_puzzle_1.png"), Input.CURSOR_ARROW, Vector2(12,12))
 
 func _process(delta):
-	Global.Player = self
+	
 	if has_jumped and is_on_floor():
-		max_speed = export_max_speed
 		has_jumped = false
 		tick = false
 	$platformer.text = str(Global.coll_coins)
@@ -96,21 +103,18 @@ func _process(delta):
 		movement()
 		animations()
 		jump_manager()
-		$AnimationTree.active = false
 		$shooter.hide()
 		$puzzle.hide()
 	elif GenreManager.current_genre == 1:
 		movement_td()
 		shooting()
 		animations_td()
-		$AnimationTree.active = true
 		$platformer.hide()
 		$puzzle.hide()
 	elif GenreManager.current_genre ==2:
 		movement_td()
 		drag_n_drop()
 		animations_td()
-		$AnimationTree.active = true
 		$platformer.hide()
 		$shooter.hide()
 	
@@ -120,24 +124,26 @@ func _process(delta):
 		if $DashTimer.is_stopped():
 			velocity.y += get_gravity() * delta 
 		
-		#### SLOWING DOWN IN AIR ####
-		if has_jumped and !tick:
-			max_speed -= jump_slowing_down
-			tick = true
-			has_pressed_jump = false
-		
+
 	
 	## health manager ##
 	$Control/platformer.value = Global.Health
 	$Control/shooter.value = Global.Health
 	$Control/puzzle.value = Global.Health
 	
+	
+	#zooming when screen shake
+	camera.zoom = lerp(camera.zoom, Vector2(1,1), 0.3)
+	
+	if screen_shake_start:
+		camera.global_position.x += rand_range(-shake_intensity, shake_intensity) * delta
+		camera.global_position.y += rand_range(-shake_intensity, shake_intensity) * delta
+	
 
 
 
 func _physics_process(_delta):
 	pass
-	#print(has_jumped)
 	
 
 func jump_manager():
@@ -203,7 +209,7 @@ func movement():
 	if Input.is_action_just_pressed("run"):
 		max_speed += 40
 		$AnimationPlayer.playback_speed = 1.1
-	elif Input.is_action_just_released("run"):
+	elif Input.is_action_just_released("run") and max_speed == export_max_speed+40:
 		max_speed -= 40
 		$AnimationPlayer.playback_speed = 0.8
 	
@@ -348,6 +354,16 @@ func movement_td():
 	velocity = move_and_slide(velocity * _speed, Vector2.UP)
 
 
+func _screen_shake(intensity,time):
+	camera.zoom = Vector2(1,1) - Vector2(intensity * 0.003, intensity * 0.003)
+	shake_intensity = intensity
+	$Camera/Screen_shake_time.wait_time = time
+	$Camera/Screen_shake_time.start()
+	screen_shake_start = true
+
+
+
+
 func shooting():
 	Bullet_position = pist_inst._global_position
 	if Input.is_action_just_pressed("shoot"):
@@ -377,3 +393,9 @@ func hurt():
 	$SoundPlayer.play()
 
 
+
+
+
+func _on_Screen_shake_time_timeout():
+	screen_shake_start = false
+	camera.position = Vector2(0,-20)
