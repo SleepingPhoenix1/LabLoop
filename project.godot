@@ -123,6 +123,9 @@ run={
 2d_physics/layer_7="navigation_hb"
 2d_physics/layer_8="button"
 2d_physics/layer_9="floor"
+2d_physics/layer_10="scent"
+2d_physics/layer_11="enemy_area"
+2d_physics/layer_12="enemy_td"
 
 [physics]
 

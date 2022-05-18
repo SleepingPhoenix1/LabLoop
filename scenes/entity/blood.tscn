@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/blood.png" type="Texture" id=1]
+[ext_resource path="res://other/color_swap.tres" type="Material" id=2]
+[ext_resource path="res://scripts/entity/blood.gd" type="Script" id=3]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+initial_velocity_random = 0.9
+angular_velocity = 144.93
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.1
+
+[node name="blood" type="Particles2D"]
+material = ExtResource( 2 )
+position = Vector2( 33, 28 )
+z_index = -1
+amount = 21
+lifetime = 0.2
+explosiveness = 1.0
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.185
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

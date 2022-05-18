@@ -63,7 +63,14 @@ onready var Bullet = preload("res://scenes/entity/bullet.tscn")
 #node references
 onready var camera = $Camera
 
+const scent_scene = preload("res://scenes/entity/scent.tscn")
+
+var scent_trail = []
+
+
+
 func _ready():
+	$ScentTimer.connect("timeout", self, "add_scent")
 	Global.Player = self
 	Global._Camera = camera
 	$fade_out.show()
@@ -109,6 +116,7 @@ func _process(delta):
 		movement_td()
 		shooting()
 		animations_td()
+		_shooter_anim()
 		$platformer.hide()
 		$puzzle.hide()
 	elif GenreManager.current_genre ==2:
@@ -356,7 +364,7 @@ func movement_td():
 
 func _screen_shake(intensity,time,zoom):
 	if zoom:
-		camera.zoom = Vector2(1,1) - Vector2(intensity * 0.003, intensity * 0.003)
+		camera.zoom = Vector2(1,1) - Vector2(intensity * 0.002, intensity * 0.002)
 	shake_intensity = intensity
 	$Camera/Screen_shake_time.wait_time = time
 	$Camera/Screen_shake_time.start()
@@ -370,7 +378,7 @@ func shooting():
 	if Input.is_action_just_pressed("shoot"):
 		Global.instance_node(Bullet, Bullet_position, get_parent())
 		randomize()
-		_screen_shake(30,0.1,false)
+		_screen_shake(50,0.1,false)
 		pist_inst.get_node("smoke").restart()
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
@@ -395,6 +403,16 @@ func hurt():
 	$SoundPlayer.stream = load("res://sound/hurt.wav")
 	$SoundPlayer.play()
 
+
+func add_scent():
+	var scent = scent_scene.instance()
+	scent.position = position
+	
+	get_parent().add_child(scent)
+	scent_trail.push_front(scent)
+
+func _shooter_anim():
+	$EnemyArea/col_anim.play("anim")
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scripts/entity/player1.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Player_a_shoot.png" type="Texture" id=3]
@@ -491,6 +491,41 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.2, 0.235294, 0.513726, 1 )
 
+[sub_resource type="CircleShape2D" id=54]
+radius = 44.0454
+
+[sub_resource type="Animation" id=55]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 44.0454 ]
+}
+
+[sub_resource type="Animation" id=56]
+resource_name = "anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.9 ),
+"transitions": PoolRealArray( 0.466516, 0.241484, 0.482967 ),
+"update": 0,
+"values": [ 44.0454, 38.0, 44.0 ]
+}
+
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["Player", "player"]]
 collision_layer = 4
 collision_mask = 258
@@ -701,6 +736,22 @@ margin_bottom = 34.0
 mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
+
+[node name="ScentTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="EnemyArea" type="StaticBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea"]
+shape = SubResource( 54 )
+one_way_collision = true
+
+[node name="col_anim" type="AnimationPlayer" parent="EnemyArea"]
+anims/RESET = SubResource( 55 )
+anims/anim = SubResource( 56 )
 
 [connection signal="timeout" from="Camera/Screen_shake_time" to="." method="_on_Screen_shake_time_timeout"]
 [connection signal="animation_finished" from="fade" to="." method="_on_fade_animation_finished"]

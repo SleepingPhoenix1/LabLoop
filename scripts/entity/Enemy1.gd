@@ -1,13 +1,17 @@
 extends KinematicBody2D
 
-export(int) var SPEED: int = 40
-var velocity: Vector2 = Vector2.ZERO
+export var _print = false
+export(int) var SPEED: int = 50
+var dir: Vector2 = Vector2.ZERO
 export var health = 5
 
 var path: Array = []	# Contains destination positions
 var levelNavigation: Navigation2D = null
 var player = null
 var player_spotted: bool = false
+
+onready var blood = preload("res://scenes/entity/blood.tscn")
+
 
 onready var line2d = $Line2D
 onready var los = $LineOFSight
@@ -19,69 +23,79 @@ var can_shoot = false
 onready var Bullet_e = load("res://scenes/entity/bullet_enemy.tscn")
 onready var health_p = load("res://scenes/enviroment/health_pot.tscn")
 
+var once = false
 
 
-func _ready():
-	randomize()
-	var tree = get_tree()
-	if tree.has_group("LevelNavigation"):
-		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
-	if tree.has_group("Player"):
-		player = tree.get_nodes_in_group("Player")[0]
+func _physics_process(delta):
+	los.look_at(player.global_position)
+	_chase()
+	if los.is_colliding() and $stunned_timer.is_stopped():
+		chase_target()
+		if !once:
+			$shoot_timer.start()
+			once = true
+	else: can_shoot = false
 
-func _physics_process(_delta):
-	line2d.global_position = Vector2.ZERO
-	if player:
-		los.look_at(player.global_position)
-		player_direction = Vector2(sign(player.global_position.x - global_position.x), sign(player.global_position.y - global_position.y))
-		check_player_in_detection()
-		if player_spotted:
-			generate_path()
-			navigate()
-	move()
+
+
+
+
+func _chase():
+	var motion = dir * SPEED
+	move_and_slide(motion)
+	
 	
 	#health
 	if health <= 0:
 		Global.coll_coins += 3
 		Global.Player._screen_shake(60,0.1,true)
 		SoundManager.play_sound(load("res://sound/robot_explosion.wav"))
+		var inst = blood.instance()
+		get_parent().add_child(inst)
+		inst.global_position = global_position
+		
+		
+		
 		if rand_range(0,6) < 1:
 			var ins = health_p.instance()
 			ins.global_position = global_position
 			get_parent().get_parent().add_child(ins)
 		queue_free()
 
-func check_player_in_detection():
-	var collider = los.get_collider()
-	if collider and collider.is_in_group("Player"):
-		player_spotted = true
+func _ready():
+	
+	randomize()
+	var tree = get_tree()
+	if tree.has_group("Player"):
+		player = tree.get_nodes_in_group("Player")[0]
+	#dir = (player.position - position).normalized()
+	
+
+
+
+func chase_target():
+	if los.get_collider() == player:
+		dir = (player.position - position).normalized()
 		can_shoot = true
-	else: 
-		player_spotted = false
-		path = []
-		velocity = Vector2.ZERO
-		can_shoot = false
-
-func navigate():	# Define the next position to go to
-	if path.size() > 0:
-		velocity = global_position.direction_to(path[1]) * SPEED
-		
-		# If reached the destination, remove this point from path array
-		if global_position == path[0]:
-			path.pop_front()
-
-func generate_path():	# It's obvious
-	if levelNavigation != null and player != null:
-		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
-
-func move():
-	if velocity != Vector2.ZERO:
-		AnimTree.set("parameters/idle/blend_position", velocity)
-		AnimTree.set("parameters/walk/blend_position", velocity)
-		AnimState.travel("walk")
 	else:
-		AnimState.travel("idle")
-	velocity = move_and_slide(velocity)
+		can_shoot = false
+		for scent in player.scent_trail:
+			if _print:
+				print($scent.get_collider())
+			$scent.look_at(scent.global_position)
+			if $scent.get_collider() == scent.get_node("ar"):
+				dir = (scent.position - position).normalized()
+				los.force_raycast_update()
+				
+				
+				if !los.get_collider() == player:
+					dir = (scent.position - position).normalized()
+					break
+			elif $scent.get_collider() != scent.get_node("ar"): dir = Vector2.ZERO
+	
+
+
+
 
 
 func _on_Area2D_area_entered(area):
@@ -90,6 +104,8 @@ func _on_Area2D_area_entered(area):
 		$SoundPlayer.stream = load("res://sound/hurt.wav")
 		$SoundPlayer.play()
 		area.explode()
+		$stunned_timer.start()
+		dir = -dir*0.3
 
 
 func _on_shoot_timer_timeout():

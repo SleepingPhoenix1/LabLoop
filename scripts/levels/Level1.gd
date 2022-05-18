@@ -32,3 +32,4 @@ func _ready():
 		color_swap.set_shader_param("color5", Color("e0945a"))
 		if !SoundManager.stream == preload("res://sound/Labloop_Puzzle_v1.mp3"):
 			SoundManager.play_music(2)
+
