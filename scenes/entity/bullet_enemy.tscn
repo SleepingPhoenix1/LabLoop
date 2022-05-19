@@ -45,7 +45,7 @@ process_material = ExtResource( 4 )
 texture = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.7
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]

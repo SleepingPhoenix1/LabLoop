@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 export var _print = false
-export(int) var SPEED: int = 50
+export(int) var SPEED: int = 55
 var dir: Vector2 = Vector2.ZERO
-export var health = 5
+export var health = 4
 
 var path: Array = []	# Contains destination positions
 var levelNavigation: Navigation2D = null

@@ -34,6 +34,7 @@ position = Vector2( 12, 0 )
 texture = ExtResource( 1 )
 
 [node name="shoot_pos" type="Position2D" parent="Sprite"]
+position = Vector2( 0, -1 )
 
 [node name="smoke" type="Particles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.447059 )

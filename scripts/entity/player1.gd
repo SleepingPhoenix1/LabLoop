@@ -51,7 +51,10 @@ var selected = false
 var Bullet_position
 onready var pistol = preload("res://scenes/entity/Pistol.tscn")
 var pist_inst
-
+var shoot = false
+export var ammo = 8
+var reload = false
+export var reload_once = false
 #screen shake 
 var screen_shake_start = false
 var shake_intensity = 0
@@ -71,6 +74,7 @@ var scent_trail = []
 
 func _ready():
 	$ScentTimer.connect("timeout", self, "add_scent")
+	$Control/heartbeat.play("heartbeat")
 	Global.Player = self
 	Global._Camera = camera
 	$fade_out.show()
@@ -88,6 +92,7 @@ func _ready():
 		$Control/puzzle.hide()
 		pist_inst = pistol.instance()
 		add_child(pist_inst)
+		ammo = 8
 	elif GenreManager.current_genre == 2:
 		$Control/platformer.hide()
 		$Control/shooter.hide()
@@ -107,6 +112,7 @@ func _process(delta):
 	
 	#adjusting stuff for different genres
 	if GenreManager.current_genre == 0:
+		ammo = -1
 		movement()
 		animations()
 		jump_manager()
@@ -120,6 +126,7 @@ func _process(delta):
 		$platformer.hide()
 		$puzzle.hide()
 	elif GenreManager.current_genre ==2:
+		ammo = -1
 		movement_td()
 		drag_n_drop()
 		animations_td()
@@ -147,7 +154,13 @@ func _process(delta):
 		camera.global_position.x += rand_range(-shake_intensity, shake_intensity) * delta
 		camera.global_position.y += rand_range(-shake_intensity, shake_intensity) * delta
 	
-
+	#AMMO MANAGER
+	for i in $Control/ammo.get_children():
+		if int(i.name) > ammo:
+			i.hide()
+		else: i.show()
+	
+	
 
 
 func _physics_process(_delta):
@@ -355,11 +368,21 @@ func movement_td():
 	velocity = velocity.normalized()
 	if velocity != Vector2.ZERO:
 		$Particles2D.emitting = true
+		_walk_shake(5,0.1)
 	else:
 		$Particles2D.emitting = false
 	
 	
 	velocity = move_and_slide(velocity * _speed, Vector2.UP)
+
+
+func _walk_shake(intensity,time):
+	if !screen_shake_start:
+		shake_intensity = intensity
+		$Camera/Screen_shake_time.wait_time = time
+		$Camera/Screen_shake_time.start()
+		screen_shake_start = true
+
 
 
 func _screen_shake(intensity,time,zoom):
@@ -374,8 +397,16 @@ func _screen_shake(intensity,time,zoom):
 
 
 func shooting():
-	Bullet_position = pist_inst._global_position
 	if Input.is_action_just_pressed("shoot"):
+		$shoot_delay.start()
+		$shoot_delay.wait_time = 0.2
+	elif Input.is_action_just_released("shoot"):
+		$shoot_delay.stop()
+		$shoot_delay.wait_time = 0.05
+		shoot = false
+	Bullet_position = pist_inst._global_position
+	if shoot and ammo > 0:
+		shoot = false
 		Global.instance_node(Bullet, Bullet_position, get_parent())
 		randomize()
 		_screen_shake(50,0.1,false)
@@ -383,6 +414,14 @@ func shooting():
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
 		$SoundPlayer.play()
+		ammo -=1
+	
+	if ammo == 0 and !reload_once: 
+		$reload_timer.start()
+		reload_once = true
+	
+	
+
 
 func drag_n_drop():
 	pass
@@ -402,6 +441,8 @@ func _on_fade_animation_finished(anim_name):
 func hurt():
 	$SoundPlayer.stream = load("res://sound/hurt.wav")
 	$SoundPlayer.play()
+	$Control/heartbeat.play("damage")
+	
 
 
 func add_scent():
@@ -420,3 +461,16 @@ func _shooter_anim():
 func _on_Screen_shake_time_timeout():
 	screen_shake_start = false
 	camera.position = Vector2(0,-20)
+
+
+func _on_shoot_delay_timeout():
+	shoot = true
+
+
+func _on_heartbeat_animation_finished(anim_name):
+	if anim_name == "damage":
+		$Control/heartbeat.play("heartbeat")
+
+
+func _on_reload_timer_timeout():
+	$Control/reloadammo.play("reload")
