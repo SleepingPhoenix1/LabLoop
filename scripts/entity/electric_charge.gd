@@ -37,8 +37,10 @@ func explode():
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("b_left"):
 		rotation_degrees += 90
+		body.get_parent().direction = -1
 	elif body.is_in_group("b_right"):
 		rotation_degrees -= 90
+		body.get_parent().direction = 1
 	elif body.is_in_group("charge_catcher"):
 		body.get_parent().activate()
 		explode()

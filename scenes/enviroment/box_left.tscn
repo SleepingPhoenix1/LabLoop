@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/box_left.png" type="Texture" id=1]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=2]
 [ext_resource path="res://scripts/enviroment/move_box.gd" type="Script" id=3]
+[ext_resource path="res://sprites/block.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
@@ -12,12 +13,25 @@ region = Rect2( 0, 0, 8, 8 )
 atlas = ExtResource( 1 )
 region = Rect2( 8, 0, 8, 8 )
 
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 8, 8 )
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
-"name": "default",
+"name": "def",
 "speed": 1.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "charge_in",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -26,22 +40,85 @@ extents = Vector2( 3, 3 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4, 4 )
 
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0.00332901, 0.74148 ), 0.0, 1.11697, 0, 0, Vector2( 1, 0.209834 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+flag_disable_z = true
+direction = Vector3( 1, -1, 0 )
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 0.29
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.15
+scale_random = 0.14
+scale_curve = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=15]
+flag_disable_z = true
+direction = Vector3( -1, -1, 0 )
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 0.29
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.15
+scale_random = 0.14
+scale_curve = SubResource( 13 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("box/AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "shake"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("box/AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 2.63902, 1.7411, 1 ),
+"update": 0,
+"values": [ -5.0, 5.0, -5.0 ]
+}
+
 [node name="box_l" type="Node2D" groups=["b_left"]]
 script = ExtResource( 3 )
 
-[node name="box_l" type="StaticBody2D" parent="." groups=["b_left"]]
+[node name="box" type="StaticBody2D" parent="." groups=["b_left"]]
 collision_layer = 16
 collision_mask = 6
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="box_l"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="box"]
 material = ExtResource( 2 )
 position = Vector2( -4, -4 )
 frames = SubResource( 9 )
+animation = "def"
 frame = 1
 playing = true
 centered = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="box_l"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="box"]
 shape = SubResource( 4 )
 
 [node name="area" type="Area2D" parent="." groups=["b_left"]]
@@ -54,5 +131,28 @@ __meta__ = {
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="area"]
 shape = SubResource( 7 )
+
+[node name="worried" type="Particles2D" parent="."]
+material = ExtResource( 2 )
+position = Vector2( 3, -1 )
+amount = 2
+lifetime = 0.5
+explosiveness = 0.1
+local_coords = false
+process_material = SubResource( 14 )
+texture = ExtResource( 4 )
+
+[node name="worried2" type="Particles2D" parent="."]
+material = ExtResource( 2 )
+position = Vector2( -3, -2 )
+amount = 2
+lifetime = 0.5
+local_coords = false
+process_material = SubResource( 15 )
+texture = ExtResource( 4 )
+
+[node name="shake" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 16 )
+anims/shake = SubResource( 17 )
 
 [connection signal="input_event" from="area" to="." method="_on_area_input_event"]

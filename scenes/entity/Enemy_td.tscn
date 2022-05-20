@@ -1,14 +1,14 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://sprites/enemy1.png" type="Texture" id=1]
+[ext_resource path="res://sprites/enemy_td_1.png" type="Texture" id=1]
 [ext_resource path="res://scripts/entity/Enemy1.gd" type="Script" id=2]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4 )
+extents = Vector2( 4.5, 6.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5, 5 )
+extents = Vector2( 4.5, 6.5 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -22,111 +22,59 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 6 ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "down"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 0, 2, 0 ]
-}
-
-[sub_resource type="Animation" id=8]
-resource_name = "down_idle"
-length = 0.1
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "left"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 9, 11, 10, 11 ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "left_idle"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 11 ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "right"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 4, 3, 5, 3 ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "right_idle"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
+"values": [ 9 ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "up"
+resource_name = "idle_attack"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_calm"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle_calm"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemy1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "walk"
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -139,85 +87,8 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 7, 6, 8, 6 ]
+"values": [ 16, 17, 18, 19 ]
 }
-
-[sub_resource type="Animation" id=11]
-resource_name = "up_idle"
-length = 0.1
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Enemy1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 6 ]
-}
-
-[sub_resource type="AnimationNodeAnimation" id=12]
-animation = "down_idle"
-
-[sub_resource type="AnimationNodeAnimation" id=13]
-animation = "up_idle"
-
-[sub_resource type="AnimationNodeAnimation" id=14]
-animation = "left_idle"
-
-[sub_resource type="AnimationNodeAnimation" id=15]
-animation = "right_idle"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=16]
-blend_point_0/node = SubResource( 12 )
-blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 13 )
-blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 14 )
-blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 15 )
-blend_point_3/pos = Vector2( 1, 0 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id=17]
-animation = "down"
-
-[sub_resource type="AnimationNodeAnimation" id=18]
-animation = "up"
-
-[sub_resource type="AnimationNodeAnimation" id=19]
-animation = "left"
-
-[sub_resource type="AnimationNodeAnimation" id=20]
-animation = "right"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=21]
-blend_point_0/node = SubResource( 17 )
-blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 18 )
-blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 19 )
-blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 20 )
-blend_point_3/pos = Vector2( 1, 0 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-
-[sub_resource type="AnimationNodeStateMachine" id=24]
-states/idle/node = SubResource( 16 )
-states/idle/position = Vector2( 205, 100 )
-states/walk/node = SubResource( 21 )
-states/walk/position = Vector2( 476, 100 )
-transitions = [ "idle", "walk", SubResource( 22 ), "walk", "idle", SubResource( 23 ) ]
-start_node = "idle"
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 collision_layer = 2050
@@ -227,11 +98,12 @@ script = ExtResource( 2 )
 [node name="Enemy1" type="Sprite" parent="."]
 material = ExtResource( 3 )
 texture = ExtResource( 1 )
-hframes = 6
-vframes = 4
-frame = 6
+hframes = 8
+vframes = 6
+frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 1.5 )
 shape = SubResource( 1 )
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -260,29 +132,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.5, 1.5 )
 shape = SubResource( 2 )
 
 [node name="shoot_timer" type="Timer" parent="."]
-wait_time = 0.9
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
-anims/down = SubResource( 5 )
-anims/down_idle = SubResource( 8 )
-anims/left = SubResource( 6 )
-anims/left_idle = SubResource( 9 )
-anims/right = SubResource( 7 )
-anims/right_idle = SubResource( 10 )
-anims/up = SubResource( 4 )
-anims/up_idle = SubResource( 11 )
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 24 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 25 )
-parameters/idle/blend_position = Vector2( 0, 0 )
-parameters/walk/blend_position = Vector2( 0, 0 )
+wait_time = 0.6
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
@@ -294,6 +148,12 @@ autostart = true
 [node name="stunned_timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/idle_attack = SubResource( 4 )
+anims/idle_calm = SubResource( 5 )
+anims/walk = SubResource( 6 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

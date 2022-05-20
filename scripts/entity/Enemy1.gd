@@ -15,8 +15,6 @@ onready var blood = preload("res://scenes/entity/blood.tscn")
 
 onready var line2d = $Line2D
 onready var los = $LineOFSight
-onready var AnimTree = $AnimationTree
-onready var AnimState = AnimTree.get("parameters/playback")
 
 var player_direction = Vector2()
 var can_shoot = false
@@ -24,7 +22,7 @@ onready var Bullet_e = load("res://scenes/entity/bullet_enemy.tscn")
 onready var health_p = load("res://scenes/enviroment/health_pot.tscn")
 
 var once = false
-
+var once2 = false
 
 func _physics_process(delta):
 	los.look_at(player.global_position)
@@ -34,13 +32,17 @@ func _physics_process(delta):
 		if !once:
 			$shoot_timer.start()
 			once = true
-	else: can_shoot = false
+	else: 
+		can_shoot = false
 
 
-
+func _calm():
+	$AnimationPlayer.play("idle_calm")
 
 
 func _chase():
+	if dir == Vector2.ZERO and $AnimationPlayer.current_animation != "idle_calm":
+		$AnimationPlayer.play("idle_attack")
 	var motion = dir * SPEED
 	move_and_slide(motion)
 	
@@ -63,7 +65,7 @@ func _chase():
 		queue_free()
 
 func _ready():
-	
+	$AnimationPlayer.play("idle_calm")
 	randomize()
 	var tree = get_tree()
 	if tree.has_group("Player"):
@@ -74,24 +76,34 @@ func _ready():
 
 
 func chase_target():
+	#if _print:
+	#	print($AnimationPlayer.current_animation)
 	if los.get_collider() == player:
+		once2 = false
+		$AnimationPlayer.play("walk")
+		$Enemy1.scale.x = sign(player.global_position.x-global_position.x)
 		dir = (player.position - position).normalized()
 		can_shoot = true
 	else:
 		can_shoot = false
 		for scent in player.scent_trail:
-			if _print:
-				print($scent.get_collider())
 			$scent.look_at(scent.global_position)
 			if $scent.get_collider() == scent.get_node("ar"):
+				$AnimationPlayer.play("walk")
+				$Enemy1.scale.x = sign(scent.global_position.x-global_position.x)
 				dir = (scent.position - position).normalized()
 				los.force_raycast_update()
 				
 				
 				if !los.get_collider() == player:
+					$AnimationPlayer.play("walk")
+					$Enemy1.scale.x = sign(scent.global_position.x-global_position.x)
 					dir = (scent.position - position).normalized()
+					$Enemy1.scale.x = sign(player.global_position.x-global_position.x)
 					break
-			elif $scent.get_collider() != scent.get_node("ar"): dir = Vector2.ZERO
+			elif $scent.get_collider() != scent.get_node("ar"): 
+				dir = Vector2.ZERO
+				
 	
 
 
@@ -114,4 +126,7 @@ func _on_shoot_timer_timeout():
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
 		$SoundPlayer.play()
+
+
+
 
