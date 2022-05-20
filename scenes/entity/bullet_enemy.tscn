@@ -31,7 +31,7 @@ position = Vector2( -0.5, 1 )
 scale = Vector2( 0.75, 0.6 )
 
 [node name="Explosion" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.5
 one_shot = true
 
 [node name="explosion" type="Particles2D" parent="."]
@@ -45,7 +45,7 @@ process_material = ExtResource( 4 )
 texture = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.7
+wait_time = 0.25
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]

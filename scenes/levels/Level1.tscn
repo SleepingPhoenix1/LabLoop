@@ -196,6 +196,7 @@ script = ExtResource( 10 )
 
 [node name="Enemy" parent="enemies/platformer" instance=ExtResource( 12 )]
 position = Vector2( 211, 345 )
+speed = 40
 
 [node name="Enemy2" parent="enemies/platformer" instance=ExtResource( 12 )]
 position = Vector2( 379, 264 )
