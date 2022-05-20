@@ -368,7 +368,8 @@ func movement_td():
 	velocity = velocity.normalized()
 	if velocity != Vector2.ZERO:
 		$Particles2D.emitting = true
-		_walk_shake(5,0.1)
+		if GenreManager.current_genre == 1:
+			_walk_shake(5,0.1)
 	else:
 		$Particles2D.emitting = false
 	

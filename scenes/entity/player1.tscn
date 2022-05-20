@@ -1,8 +1,7 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://sprites/heart.png" type="Texture" id=1]
 [ext_resource path="res://scripts/entity/player1.gd" type="Script" id=2]
-[ext_resource path="res://sprites/Player_a_shoot.png" type="Texture" id=3]
 [ext_resource path="res://sprites/ammo.png" type="Texture" id=4]
 [ext_resource path="res://other/color_swap.tres" type="Material" id=5]
 [ext_resource path="res://sprites/block.png" type="Texture" id=6]
@@ -15,7 +14,7 @@ extents = Vector2( 3.70932, 3.95521 )
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
+tracks/0/path = NodePath("Player:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -24,7 +23,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1 ]
+"values": [ true ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Player:frame")
@@ -38,35 +37,11 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Player:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=15]
 resource_name = "down_sh"
 length = 0.4
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 0, 2, 0 ]
-}
 
 [sub_resource type="Animation" id=14]
 resource_name = "fall"
@@ -80,7 +55,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 11, 12 ]
 }
 
@@ -95,60 +70,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-
-[sub_resource type="Animation" id=17]
-resource_name = "idle_down_sh"
-length = 0.1
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
+"times": PoolRealArray( 0, 1.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 1 ]
 }
 
 [sub_resource type="Animation" id=18]
 resource_name = "idle_left_sh"
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Player:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Player:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "idle_right_sh"
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -158,10 +87,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 1.1 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ true ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Player:frame")
@@ -170,27 +99,39 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.3 ),
+"times": PoolRealArray( 0, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="Animation" id=20]
-resource_name = "idle_up_sh"
-length = 0.1
+[sub_resource type="Animation" id=19]
+resource_name = "idle_right_sh"
+length = 1.5
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
+tracks/0/path = NodePath("Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -206,7 +147,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ 10 ]
 }
 
@@ -214,18 +155,6 @@ tracks/0/keys = {
 resource_name = "left_sh"
 length = 0.4
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 9, 11, 10, 11 ]
-}
 
 [sub_resource type="Animation" id=13]
 resource_name = "on_wall"
@@ -236,35 +165,11 @@ loop = true
 resource_name = "right_sh"
 length = 0.4
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 8, 6, 7, 6 ]
-}
 
 [sub_resource type="Animation" id=16]
 resource_name = "up_sh"
 length = 0.4
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerAShoot:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 4, 3, 5, 3 ]
-}
 
 [sub_resource type="Animation" id=4]
 resource_name = "walk"
@@ -278,16 +183,16 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 3, 4, 5, 6, 7, 8, 9 ]
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 2, 3, 4, 5, 6, 7, 8, 9, 9 ]
 }
 
 [sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Player:scale")
+tracks/0/path = NodePath("Player:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -296,10 +201,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( 0, -3 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Player:position")
+tracks/1/path = NodePath("Player:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -308,7 +213,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -3 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -321,7 +226,7 @@ length = 10.0
 loop = true
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Player:scale")
+tracks/0/path = NodePath("Player:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -330,10 +235,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.65625 ) ]
+"values": [ Vector2( 0, -3 ), Vector2( 0, -1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Player:position")
+tracks/1/path = NodePath("Player:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -342,7 +247,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -3 ), Vector2( 0, -1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.65625 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -666,14 +571,6 @@ flip_h = true
 hframes = 7
 vframes = 6
 
-[node name="PlayerAShoot" type="Sprite" parent="."]
-visible = false
-material = ExtResource( 5 )
-texture = ExtResource( 3 )
-hframes = 6
-vframes = 6
-frame = 1
-
 [node name="Coyote timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -688,15 +585,13 @@ collision_mask = 257
 volume_db = -15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 0.9
+playback_speed = 0.8
 anims/RESET = SubResource( 2 )
 anims/down_sh = SubResource( 15 )
 anims/fall = SubResource( 14 )
 anims/idle = SubResource( 3 )
-anims/idle_down_sh = SubResource( 17 )
 anims/idle_left_sh = SubResource( 18 )
 anims/idle_right_sh = SubResource( 19 )
-anims/idle_up_sh = SubResource( 20 )
 anims/jump = SubResource( 7 )
 anims/left_sh = SubResource( 21 )
 anims/on_wall = SubResource( 13 )
