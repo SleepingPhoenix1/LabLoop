@@ -50,8 +50,8 @@ texture = ExtResource( 5 )
 
 [node name="ElectricStuff" type="AnimatedSprite" parent="."]
 material = ExtResource( 3 )
+z_index = 1
 frames = SubResource( 4 )
-frame = 1
 playing = true
 
 [node name="Timer" type="Timer" parent="."]

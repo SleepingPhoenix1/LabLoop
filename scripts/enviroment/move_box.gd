@@ -31,3 +31,8 @@ func _on_area_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("shoot"):
 		selected = true
 		
+
+func _ready():
+	if GenreManager.current_genre ==2:
+		$box.set_collision_mask_bit(2, false)
+

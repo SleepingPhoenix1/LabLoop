@@ -348,6 +348,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="buttons" type="Node2D" parent="enviroment"]
+
+[node name="wall_button" parent="enviroment/buttons" instance=ExtResource( 18 )]
+position = Vector2( 657, 50 )
+door = NodePath("../../../Doors/Door5")
+
+[node name="wall_button2" parent="enviroment/buttons" instance=ExtResource( 18 )]
+position = Vector2( 469, -95 )
+door = NodePath("../../../Doors/Door5")
+
 [node name="ElectricLamp" parent="enviroment" instance=ExtResource( 10 )]
 position = Vector2( 54, 130 )
 
@@ -451,16 +461,6 @@ position = Vector2( 637, 121 )
 
 [node name="Area2D13" parent="enviroment/coins" instance=ExtResource( 17 )]
 position = Vector2( 646, 67 )
-
-[node name="buttons" type="Node2D" parent="enviroment"]
-
-[node name="wall_button" parent="enviroment/buttons" instance=ExtResource( 18 )]
-position = Vector2( 657, 50 )
-door = NodePath("../../../Doors/Door5")
-
-[node name="wall_button2" parent="enviroment/buttons" instance=ExtResource( 18 )]
-position = Vector2( 469, -95 )
-door = NodePath("../../../Doors/Door5")
 
 [node name="Lazer" type="Area2D" parent="enviroment"]
 collision_layer = 0

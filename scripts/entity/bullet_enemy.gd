@@ -7,11 +7,11 @@ var look_once = true
 
 var is_exploiding = false
 func _ready():
-	pass
+	randomize()
 
 func _process(delta):
 	if look_once:
-		look_at(Global.Player.global_position)
+		look_at(Global.Player.global_position+Vector2(rand_range(-16,16),rand_range(-16,16)))
 		look_once = false
 		$Explosion.start()
 	global_position += velocity.rotated(rotation) * speed * delta

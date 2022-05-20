@@ -25,6 +25,7 @@ var once = false
 var once2 = false
 
 func _physics_process(delta):
+	$Node2D.player_visible = player_spotted
 	los.look_at(player.global_position)
 	_chase()
 	if los.is_colliding() and $stunned_timer.is_stopped():
@@ -71,7 +72,7 @@ func _ready():
 	if tree.has_group("Player"):
 		player = tree.get_nodes_in_group("Player")[0]
 	#dir = (player.position - position).normalized()
-	
+	$Node2D.enemy = self
 
 
 
@@ -79,12 +80,14 @@ func chase_target():
 	#if _print:
 	#	print($AnimationPlayer.current_animation)
 	if los.get_collider() == player:
+		player_spotted = true
 		once2 = false
 		$AnimationPlayer.play("walk")
 		$Enemy1.scale.x = sign(player.global_position.x-global_position.x)
 		dir = (player.position - position).normalized()
 		can_shoot = true
 	else:
+		player_spotted = false
 		can_shoot = false
 		for scent in player.scent_trail:
 			$scent.look_at(scent.global_position)
@@ -100,6 +103,7 @@ func chase_target():
 					$Enemy1.scale.x = sign(scent.global_position.x-global_position.x)
 					dir = (scent.position - position).normalized()
 					$Enemy1.scale.x = sign(player.global_position.x-global_position.x)
+					player_spotted = true
 					break
 			elif $scent.get_collider() != scent.get_node("ar"): 
 				dir = Vector2.ZERO
@@ -122,7 +126,7 @@ func _on_Area2D_area_entered(area):
 
 func _on_shoot_timer_timeout():
 	if can_shoot:
-		Global.instance_node(Bullet_e, global_position, get_parent())
+		Global.instance_node(Bullet_e, $Node2D._global_position, get_parent())
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
 		$SoundPlayer.play()
