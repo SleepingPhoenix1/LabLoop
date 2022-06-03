@@ -5,14 +5,6 @@
 [ext_resource path="res://scripts/enviroment/move_box.gd" type="Script" id=3]
 [ext_resource path="res://sprites/block.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 8, 8 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 8, 0, 8, 8 )
-
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 8, 8 )
@@ -21,17 +13,25 @@ region = Rect2( 16, 0, 8, 8 )
 atlas = ExtResource( 1 )
 region = Rect2( 24, 0, 8, 8 )
 
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 8 )
+
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "def",
-"speed": 1.0
-}, {
 "frames": [ SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
 "name": "charge_in",
 "speed": 1.5
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "def",
+"speed": 1.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -134,6 +134,7 @@ shape = SubResource( 7 )
 [node name="worried" type="Particles2D" parent="."]
 material = ExtResource( 2 )
 position = Vector2( 3, -1 )
+emitting = false
 amount = 2
 lifetime = 0.5
 explosiveness = 0.1
@@ -144,6 +145,7 @@ texture = ExtResource( 4 )
 [node name="worried2" type="Particles2D" parent="."]
 material = ExtResource( 2 )
 position = Vector2( -3, -2 )
+emitting = false
 amount = 2
 lifetime = 0.5
 local_coords = false

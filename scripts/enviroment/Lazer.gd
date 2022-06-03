@@ -7,4 +7,4 @@ func _ready():
 
 func _on_Lazer_body_entered(_body):
 	Global.Health = 0
-	Global.hurt()
+	Global.hurt(false)

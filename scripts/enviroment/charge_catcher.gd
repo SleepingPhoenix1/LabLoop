@@ -1,10 +1,13 @@
 extends Node2D
 
 export(NodePath) var door
-var can = true
 
+
+var trigger_once = true
+
+#decreases the buttons needed for the door
 func activate():
-	if door and can:
+	if door and trigger_once:
 		get_node(door).buttons_required -=1
-		can = false
+		trigger_once = false
 		$Node2D/ChargeCatcher.frame = 1

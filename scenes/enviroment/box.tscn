@@ -5,6 +5,9 @@
 [ext_resource path="res://scripts/enviroment/move_box.gd" type="Script" id=3]
 [ext_resource path="res://sprites/block.png" type="Texture" id=4]
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 3.5 )
+
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 8, 8 )
@@ -30,9 +33,6 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 4, 3.5 )
-
-[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 3.5 )
 
 [sub_resource type="Curve" id=10]
@@ -100,6 +100,14 @@ tracks/0/keys = {
 [node name="box" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="area"]
+shape = SubResource( 5 )
+
 [node name="box" type="StaticBody2D" parent="."]
 position = Vector2( -4, 4 )
 collision_layer = 16
@@ -119,16 +127,10 @@ offset = Vector2( -4, -4 )
 position = Vector2( 4, -4 )
 shape = SubResource( 4 )
 
-[node name="area" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="area"]
-shape = SubResource( 5 )
-
 [node name="worried" type="Particles2D" parent="."]
 material = ExtResource( 2 )
 position = Vector2( 3, -1 )
+emitting = false
 amount = 2
 lifetime = 0.5
 explosiveness = 0.1
@@ -139,6 +141,7 @@ texture = ExtResource( 4 )
 [node name="worried2" type="Particles2D" parent="."]
 material = ExtResource( 2 )
 position = Vector2( -3, -2 )
+emitting = false
 amount = 2
 lifetime = 0.5
 local_coords = false

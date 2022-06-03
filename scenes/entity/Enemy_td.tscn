@@ -5,8 +5,9 @@
 [ext_resource path="res://other/color_swap.tres" type="Material" id=3]
 [ext_resource path="res://scenes/entity/pistol_enemy.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.5, 6.5 )
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 4.5
+height = 4.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4.5, 6.5 )
@@ -92,9 +93,11 @@ tracks/0/keys = {
 }
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+z_index = 1
 collision_layer = 2050
 collision_mask = 276
 script = ExtResource( 2 )
+health = 3
 
 [node name="Enemy1" type="Sprite" parent="."]
 material = ExtResource( 3 )
@@ -105,19 +108,19 @@ frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 1.5 )
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 1.0
 
 [node name="LineOFSight" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 125, 0 )
+cast_to = Vector2( 80, 0 )
 collision_mask = 276
 
 [node name="scent" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 125, 0 )
+cast_to = Vector2( 80, 0 )
 collision_mask = 784
 collide_with_areas = true
 
@@ -156,7 +159,7 @@ anims/idle_attack = SubResource( 4 )
 anims/idle_calm = SubResource( 5 )
 anims/walk = SubResource( 6 )
 
-[node name="Node2D" parent="." instance=ExtResource( 4 )]
+[node name="pistol" parent="." instance=ExtResource( 4 )]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

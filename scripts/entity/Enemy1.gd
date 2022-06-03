@@ -17,24 +17,42 @@ onready var line2d = $Line2D
 onready var los = $LineOFSight
 
 var player_direction = Vector2()
+
 var can_shoot = false
 onready var Bullet_e = load("res://scenes/entity/bullet_enemy.tscn")
 onready var health_p = load("res://scenes/enviroment/health_pot.tscn")
 
 var once = false
-var once2 = false
+
+
+func _ready():
+	$AnimationPlayer.play("idle_calm")
+	randomize()
+	var tree = get_tree()
+	if tree.has_group("Player"):
+		player = tree.get_nodes_in_group("Player")[0]
+	$pistol.enemy = self
+
+
+
+
 
 func _physics_process(delta):
-	$Node2D.player_visible = player_spotted
+	#if player is visible send a signal to a pistol to point to the player
+	$pistol.player_visible = player_spotted
+	#make line of sight always point to the player
 	los.look_at(player.global_position)
-	_chase()
-	if los.is_colliding() and $stunned_timer.is_stopped():
+	#if line of sight detects a player and stunt timer is not working chase player
+	if $stunned_timer.is_stopped():
 		chase_target()
 		if !once:
 			$shoot_timer.start()
 			once = true
 	else: 
 		can_shoot = false
+
+func _process(delta):
+	_chase()
 
 
 func _calm():
@@ -59,29 +77,22 @@ func _chase():
 		
 		
 		
-		if rand_range(0,6) < 1:
+		if rand_range(0,5.5) < 1:
 			var ins = health_p.instance()
 			ins.global_position = global_position
 			get_parent().get_parent().add_child(ins)
 		queue_free()
 
-func _ready():
-	$AnimationPlayer.play("idle_calm")
-	randomize()
-	var tree = get_tree()
-	if tree.has_group("Player"):
-		player = tree.get_nodes_in_group("Player")[0]
-	#dir = (player.position - position).normalized()
-	$Node2D.enemy = self
 
 
 
 func chase_target():
 	#if _print:
 	#	print($AnimationPlayer.current_animation)
+	
+	#get_collider() returns a closest collider so if player is not behind a wall it will detect the player
 	if los.get_collider() == player:
 		player_spotted = true
-		once2 = false
 		$AnimationPlayer.play("walk")
 		$Enemy1.scale.x = sign(player.global_position.x-global_position.x)
 		dir = (player.position - position).normalized()
@@ -126,7 +137,7 @@ func _on_Area2D_area_entered(area):
 
 func _on_shoot_timer_timeout():
 	if can_shoot:
-		Global.instance_node(Bullet_e, $Node2D._global_position, get_parent())
+		Global.instance_node(Bullet_e, $pistol._global_position, get_parent())
 		$SoundPlayer.pitch_scale = rand_range(0.5,1.2)
 		$SoundPlayer.stream = load("res://sound/LabLoop_Pistol_v2_Round_Robin_5of8_.wav")
 		$SoundPlayer.play()

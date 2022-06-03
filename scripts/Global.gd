@@ -4,6 +4,7 @@ var Player = null
 var _Camera = null
 var Health = 10
 var selected = false
+var hit_bullet = null
 
 var coll_coins = 0
 
@@ -13,9 +14,11 @@ func instance_node(node, location, parent):
 	node_inst.global_position = location
 	return node_inst
 
-func hurt():
-	Health -=1
+func hurt(stunt):
 	Player.hurt()
+	if stunt:
+		Player.stunt(hit_bullet)
+		hit_bullet = null
 
 func _process(_delta):
 	if Health <= 0:

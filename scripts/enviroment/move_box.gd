@@ -1,7 +1,7 @@
 extends Node2D
 
 var selected = false
-var direction
+var direction = null
 
 func _physics_process(delta):
 	if selected and GenreManager.current_genre == 2:
@@ -14,10 +14,7 @@ func _physics_process(delta):
 		$shake.play("RESET")
 	$worried.emitting = selected
 	$worried2.emitting = selected
-	if direction == 1:
-		$box/AnimatedSprite.play("charge_in")
-		direction = null
-	elif direction == -1:
+	if direction != null:
 		$box/AnimatedSprite.play("charge_in")
 		direction = null
 

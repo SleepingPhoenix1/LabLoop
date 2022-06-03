@@ -210,7 +210,7 @@ position = Vector2( 0, 84 )
 position = Vector2( 102, 92 )
 
 [node name="KinematicBody2D9" parent="enemies/shooter" instance=ExtResource( 9 )]
-position = Vector2( 105, 137 )
+position = Vector2( 112, 138 )
 _print = true
 
 [node name="KinematicBody2D12" parent="enemies/shooter" instance=ExtResource( 9 )]

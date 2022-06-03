@@ -14,17 +14,22 @@ export var _print = false
 var close = false
 
 func _ready():
+	#if starting state is 0 then close on start else open
 	if starting_state == 0:
 		_close()
 		close = true
 	elif starting_state == 1:
 		_open()
+	
+	#if close on genre and current genre is equal to it then close
 	if close_on_genre and genre_number == GenreManager.current_genre:
 		_close()
 		close = true
+	#if you need to close it for 2 genres
 	if close_on_genre2 and genre_number2 == GenreManager.current_genre:
 		_close()
 		close = true
+	
 	if open_on_genre and genre_number == GenreManager.current_genre:
 		_open()
 

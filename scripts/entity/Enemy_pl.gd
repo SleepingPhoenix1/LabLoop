@@ -41,7 +41,7 @@ func _physics_process(_delta):
 	$Robot.flip_h = true if velocity.x <0 else false
 
 func _on_DamageArea_body_entered(_body):
-	Global.hurt()
+	Global.hurt(false)
 	
 
 

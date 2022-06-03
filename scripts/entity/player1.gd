@@ -58,6 +58,8 @@ export var reload_once = false
 #screen shake 
 var screen_shake_start = false
 var shake_intensity = 0
+export var shoot_delay = 0.5
+var can_hurt = true
 
 #instances
 onready var Bullet = preload("res://scenes/entity/bullet.tscn")
@@ -161,11 +163,12 @@ func _process(delta):
 		else: i.show()
 	
 	
+	if !$blink.is_stopped():
+		$Player.modulate = Color(1,1,1,0.5)
+	else: $Player.modulate = Color(1,1,1,1)
+	can_hurt = $blink.is_stopped()
 
 
-func _physics_process(_delta):
-	pass
-	
 
 func jump_manager():
 	###### JUMP BUFFERING ######
@@ -374,6 +377,8 @@ func movement_td():
 		$Particles2D.emitting = false
 	
 	
+	
+	
 	velocity = move_and_slide(velocity * _speed, Vector2.UP)
 
 
@@ -400,7 +405,7 @@ func _screen_shake(intensity,time,zoom):
 func shooting():
 	if Input.is_action_just_pressed("shoot"):
 		$shoot_delay.start()
-		$shoot_delay.wait_time = 0.2
+		$shoot_delay.wait_time = shoot_delay
 	elif Input.is_action_just_released("shoot"):
 		$shoot_delay.stop()
 		$shoot_delay.wait_time = 0.05
@@ -420,7 +425,9 @@ func shooting():
 	if ammo == 0 and !reload_once: 
 		$reload_timer.start()
 		reload_once = true
-	
+	elif ammo <8 and Input.is_action_just_pressed("reload"):
+		_on_reload_timer_timeout()
+		reload_once = true
 	
 
 
@@ -440,11 +447,15 @@ func _on_fade_animation_finished(anim_name):
 
 
 func hurt():
-	$SoundPlayer.stream = load("res://sound/hurt.wav")
-	$SoundPlayer.play()
-	$Control/heartbeat.play("damage")
-	
+	if can_hurt:
+		$SoundPlayer.stream = load("res://sound/hurt.wav")
+		$SoundPlayer.play()
+		$Control/heartbeat.play("damage")
+		$blink.start()
+		Global.Health -=1
 
+func stunt(bullet_direction):
+	pass
 
 func add_scent():
 	var scent = scent_scene.instance()
